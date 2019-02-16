@@ -1,0 +1,1024 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Proposed",
+				"ProposedSalary"
+			],
+			[
+				"he",
+				"hello-world"
+			],
+			[
+				"runP",
+				"runPartThree"
+			],
+			[
+				"getOrder",
+				"getOrderbooks"
+			],
+			[
+				"arbi",
+				"arbitrageOpportunities"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Assets/Scripts/CameraAxle.cs",
+			"settings":
+			{
+				"buffer_size": 242,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 209.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"editp",
+				"Project: Edit Project"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"editpr",
+				"Project: Edit Project"
+			],
+			[
+				"ed",
+				"Project: Edit Project"
+			],
+			[
+				"edi",
+				"Project: Edit Project"
+			],
+			[
+				"packa",
+				"Package Control: Disable Package"
+			],
+			[
+				"REIND",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"edit",
+				"Project: Edit Project"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"packainst",
+				"Package Control: Install Package"
+			],
+			[
+				"packainstall",
+				"Package Control: Install Package"
+			],
+			[
+				"packageins",
+				"Package Control: Install Package"
+			],
+			[
+				"reinde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"jslint",
+				"JSLint"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"jrons",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"mater",
+				"Material Theme: Configuration"
+			],
+			[
+				"origami",
+				"Origami: Create Pane on the Right"
+			],
+			[
+				"jab",
+				"Javascript Beautify"
+			],
+			[
+				"JSON",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"json rein",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"sass",
+				"Set Syntax: Sass"
+			],
+			[
+				"matercon",
+				"Material Theme: Configuration"
+			],
+			[
+				"edirp",
+				"Project: Edit Project"
+			],
+			[
+				"edip",
+				"Project: Edit Project"
+			],
+			[
+				"keyn",
+				"Preferences: Key Bindings"
+			],
+			[
+				"mat",
+				"Material Theme: Activate theme"
+			],
+			[
+				"packac",
+				"Package Control: Enable Package"
+			],
+			[
+				"packacon",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"type",
+				"Set Syntax: TypeScript"
+			],
+			[
+				"material",
+				"Material Theme: Configuration"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Install Package Control"
+			]
+		],
+		"width": 464.0
+	},
+	"console":
+	{
+		"height": 206.0,
+		"history":
+		[
+			"sublime.log_commands(False)",
+			"sublime.log_commands(True)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": true,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/jay/node/order-background-check/.zapierapprc",
+		"/Users/jay/node/order-background-check/package.json",
+		"/Users/jay/node/order-background-check/samples/sample_order.js",
+		"/Users/jay/node/order-background-check/order-background-check.sublime-project",
+		"/Users/jay/node/luddchain/next.config.js",
+		"/Users/jay/node/luddchain/pages/index.js",
+		"/Users/jay/node/luddchain/pages/_app.js",
+		"/Users/jay/node/luddchain/pages/posts/another-hello-world.mdx",
+		"/Users/jay/node/luddchain/components/Header.js",
+		"/Users/jay/node/luddchain/.babelrc",
+		"/Users/jay/node/luddchain/components/Footer.js",
+		"/Users/jay/node/luddchain/components/PageLayout.js",
+		"/Users/jay/node/luddchain/components/PostListing.js",
+		"/Users/jay/node/luddchain/pages/about.js",
+		"/Users/jay/node/luddchain/pages/archive.js",
+		"/Users/jay/node/luddchain/pages/contact.js",
+		"/Users/jay/node/luddchain/pages/post.js",
+		"/Users/jay/node/luddchain/styles.scss",
+		"/Users/jay/node/luddchain/build_post_index.js",
+		"/Users/jay/node/luddchain/pages/posts/hello-world.mdx",
+		"/Users/jay/node/luddchain/posts.js",
+		"/Users/jay/node/luddchain/blog.sublime-project",
+		"/Users/jay/node/luddchain/package.json",
+		"/Users/jay/node/luddchain/content/hello-world.mdx",
+		"/Users/jay/node/luddchain/server.js",
+		"/Users/jay/node/luddchain/webpack.config.js",
+		"/Users/jay/node/luddchain/content/another-hello-world.mdx",
+		"/Users/jay/node/luddchain/.gitignore",
+		"/Users/jay/node/luddchain/package-lock.json",
+		"/Users/jay/node/luddchain/static/views/_layout.pug",
+		"/Users/jay/node/luddchain/now.json",
+		"/Users/jay/node/luddchain/Dockerfile",
+		"/Users/jay/node/luddchain/index.js",
+		"/Users/jay/node/luddchain/Jenkinsfile",
+		"/Users/jay/node/luddchain/components/MyLayout.js",
+		"/Users/jay/.ssh/luddchain.pub",
+		"/Users/jay/node/luddchain/static/views/index.pug",
+		"/Users/jay/node/luddchain/static/views/includes/header.pug",
+		"/Users/jay/node/luddchain/static/views/posts/hello-world.pug",
+		"/Users/jay/node/luddchain/static/style.css",
+		"/Users/jay/node/luddchain/static/views/includes/footer.pug",
+		"/Users/jay/node/luddchain/static/views/_post.pug",
+		"/Users/jay/node/luddchain/static/views/posts/market-missionaries.pug",
+		"/Users/jay/node/luddchain/static/posts/hello-world.pug",
+		"/Users/jay/node/luddchain/content/posts/hello-world.pug",
+		"/Users/jay/Downloads/backup/teams.json",
+		"/Users/jay/Downloads/backup/chat.json",
+		"/Users/jay/Downloads/backup/events.json",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/daedalus.sublime-project",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/skills/triggers.js",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/skills/events.js",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/bot.js",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/package.json",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/shrinkwrap.yaml",
+		"/Users/jay/node/extraludic/DaedalusLabrynthV2/.gitignore",
+		"/Users/jay/node/arbitrage/package-lock.json",
+		"/Users/jay/node/arbitrage/package.json",
+		"/Users/jay/node/arbitrage/models.js",
+		"/Users/jay/node/arbitrage/lib/partThree.js",
+		"/Users/jay/node/arbitrage/lib/partTwo.js",
+		"/Users/jay/node/arbitrage/lib/partOne.js",
+		"/Users/jay/node/arbitrage/assesArbPartTwo.js",
+		"/Users/jay/node/arbitrage/assesArbPartOne.js",
+		"/Users/jay/node/arbitrage/models/Arbitrage.js",
+		"/Users/jay/node/arbitrage/models/Book.js",
+		"/Users/jay/node/arbitrage/models/Opportunity.js",
+		"/Users/jay/node/arbitrage/models/Log.js",
+		"/Users/jay/node/arbitrage/repository.js",
+		"/Users/jay/node/arbitrage/appconfig.js",
+		"/Users/jay/node/arbitrage/app.js",
+		"/Users/jay/node/arbitrage/books/limit1/books3.json",
+		"/Users/jay/node/arbitrage/db.js",
+		"/Users/jay/node/arbitrage/orderBookTest.js",
+		"/Users/jay/node/arbitrage/jsonconfig.json",
+		"/Users/jay/node/arbitrage/README.md",
+		"/Users/jay/node/arbitrage/assesArbPartThree.js",
+		"/Users/jay/node/arbitrage/dump.rdb",
+		"/Users/jay/node/arbitrage/assesForArbitrageModule.js",
+		"/Users/jay/node/arbitrage/arbitrage.sublime-project",
+		"/Users/jay/node/arbitrage/.gitignore",
+		"/Users/jay/Library/Application Support/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
+		"/Users/jay/node/instagram-search/index.js",
+		"/Users/jay/node/instagram-search/tmp/data.json",
+		"/Users/jay/node/kelele/client/src/app/app.module.ts",
+		"/Users/jay/node/kelele/client/src/app/search.service.ts",
+		"/Users/jay/node/kelele/server/package.json",
+		"/Users/jay/node/kelele/client/README.md",
+		"/Users/jay/node/kelele/client/package.json",
+		"/Users/jay/node/kelele/client/.gitignore",
+		"/Users/jay/node/kelele/client/.dockerignore",
+		"/Users/jay/node/kelele/client/Dockerfile",
+		"/Users/jay/node/kelele/server/index.js",
+		"/Users/jay/node/kelele/client/src/app/app-routing.module.ts",
+		"/Users/jay/node/kelele/server/Dockerfile",
+		"/Users/jay/node/kelele/server/.dockerignore",
+		"/Users/jay/node/kelele/.gitignore",
+		"/Users/jay/node/kelele/Dockerfile",
+		"/Users/jay/node/kelele/server/config.js",
+		"/Users/jay/node/kelele/client/src/app/search/search.component.ts",
+		"/Users/jay/node/kelele/client/src/app/app.component.html",
+		"/Users/jay/node/kelele/client/src/app/app.component.ts",
+		"/Users/jay/node/kelele/client/src/app/main/main.component.html",
+		"/Users/jay/node/kelele/client/src/app/main/main.component.ts",
+		"/Users/jay/node/kelele/client/src/main.ts",
+		"/Users/jay/node/kelele/client/src/app/not-found/not-found.component.html",
+		"/Users/jay/node/kelele/client/src/app/content/content.component.html",
+		"/Users/jay/node/kelele/client/src/app/not-found/not-found.component.ts",
+		"/Users/jay/node/kelele/client/src/index.html",
+		"/Users/jay/node/kelele/client/src/app/content/content.component.ts",
+		"/Users/jay/node/kelele/client/src/app/search/search.component.html",
+		"/Users/jay/node/kelele/client/src/tab.model.ts",
+		"/Users/jay/node/kelele/client/.angular-cli.json",
+		"/Users/jay/node/kelele/client/src/_variables.scss",
+		"/Users/jay/node/kelele/client/src/styles.scss",
+		"/Users/jay/node/kelele/client/src/app/search-results/search-results.component.ts",
+		"/Users/jay/node/kelele/client/src/app/search.service.spec.ts",
+		"/Users/jay/node/kelele/client/src/app/fetcher.service.ts",
+		"/Users/jay/node/kelele/kelele.sublime-project",
+		"/Users/jay/Developer/repositories/tablib/client/src/app/app.component.ts",
+		"/Users/jay/Developer/repositories/tablib/client/src/app/app.component.html",
+		"/Users/jay/Developer/repositories/tablib/tablib.sublime-project",
+		"/Users/jay/Developer/repositories/tablib/client/src/typings.d.ts",
+		"/Users/jay/Developer/repositories/tablib/client/src/index.html",
+		"/Users/jay/Developer/repositories/tablib/client/server/config.js.template",
+		"/Users/jay/Developer/repositories/tablib/client/tsconfig.json",
+		"/Users/jay/Developer/repositories/tablib/client/src/main.ts",
+		"/Users/jay/Developer/repositories/tablib/.gitignore",
+		"/Users/jay/Developer/repositories/tablib/client/typings.json"
+	],
+	"find":
+	{
+		"height": 70.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Assets/Scripts/CameraAxle.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 162.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "my-lord.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"zap",
+				".zapierapprc"
+			],
+			[
+				"order",
+				"test/order.js"
+			],
+			[
+				"packa",
+				"package.json"
+			],
+			[
+				"sampl",
+				"samples/sample_order.js"
+			],
+			[
+				"test/iss",
+				"test/issue.js"
+			],
+			[
+				"issue",
+				"creates/issue.js"
+			],
+			[
+				".en",
+				".env"
+			],
+			[
+				"styl",
+				"styles.scss"
+			],
+			[
+				"sty",
+				"styles.scss"
+			],
+			[
+				"ano",
+				"pages/posts/another-hello-world.mdx"
+			],
+			[
+				"next",
+				"next.config.js"
+			],
+			[
+				"postlist",
+				"components/PostListing.js"
+			],
+			[
+				"_app",
+				"pages/_app.js"
+			],
+			[
+				"conf",
+				"next.config.js"
+			],
+			[
+				"st",
+				"styles.scss"
+			],
+			[
+				"paca",
+				"package.json"
+			],
+			[
+				"app",
+				"pages/_app.js"
+			],
+			[
+				"now",
+				"now.json"
+			],
+			[
+				"inde",
+				"pages/index.js"
+			],
+			[
+				"pos",
+				"pages/post.js"
+			],
+			[
+				"heade",
+				"components/Header.js"
+			],
+			[
+				"hea",
+				"components/Header.js"
+			],
+			[
+				"lay",
+				"components/PageLayout.js"
+			],
+			[
+				"anoth",
+				"pages/posts/another-hello-world.mdx"
+			],
+			[
+				"abou",
+				"pages/about.js"
+			],
+			[
+				"cont",
+				"pages/contact.js"
+			],
+			[
+				"pagela",
+				"components/PageLayout.js"
+			],
+			[
+				"head",
+				"components/Header.js"
+			],
+			[
+				"po",
+				"pages/post.js"
+			],
+			[
+				"page",
+				"components/PageLayout.js"
+			],
+			[
+				"layou",
+				"components/PageLayout.js"
+			],
+			[
+				"style",
+				"styles.scss"
+			],
+			[
+				"hell",
+				"pages/posts/another-hello-world.mdx"
+			],
+			[
+				"buil",
+				"build_post_index.js"
+			],
+			[
+				"build",
+				"build_post_index.js"
+			],
+			[
+				"",
+				"styles.scss"
+			],
+			[
+				"styles",
+				"styles.scss"
+			],
+			[
+				"header",
+				"components/Header.js"
+			],
+			[
+				"posts",
+				"posts.js"
+			],
+			[
+				"pa",
+				"package.json"
+			],
+			[
+				"post",
+				"pages/post.js"
+			],
+			[
+				"_a",
+				"pages/_app.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"nect",
+				"next.config.js"
+			],
+			[
+				"nex",
+				"next.config.js"
+			],
+			[
+				"ser",
+				"server.js"
+			],
+			[
+				"server",
+				"server.js"
+			],
+			[
+				"about",
+				"pages/about.js"
+			],
+			[
+				"bui",
+				"build_post_index.js"
+			],
+			[
+				"anot",
+				"content/another-hello-world.mdx"
+			],
+			[
+				".git",
+				".gitignore"
+			],
+			[
+				"hello",
+				"content/hello-world.mdx"
+			],
+			[
+				"serv",
+				"server.js"
+			],
+			[
+				"package",
+				"package-lock.json"
+			],
+			[
+				"next.",
+				"next.config.js"
+			],
+			[
+				"docker",
+				"Dockerfile"
+			],
+			[
+				"giti",
+				".gitignore"
+			],
+			[
+				"jen",
+				"Jenkinsfile"
+			],
+			[
+				"dock",
+				"Dockerfile"
+			],
+			[
+				"index",
+				"index.js"
+			],
+			[
+				"jenkin",
+				"Jenkinsfile"
+			],
+			[
+				"indpu",
+				"static/views/index.pug"
+			],
+			[
+				"i",
+				"static/views/index.pug"
+			],
+			[
+				"pak",
+				"package.json"
+			],
+			[
+				"layout",
+				"components/MyLayout.js"
+			],
+			[
+				"pages/ind",
+				"pages/index.js"
+			],
+			[
+				"ab",
+				"pages/about.js"
+			],
+			[
+				"foot",
+				"static/views/includes/footer.pug"
+			],
+			[
+				"hed",
+				"static/views/includes/header.pug"
+			],
+			[
+				"laoy",
+				"static/views/_layout.pug"
+			],
+			[
+				"btn",
+				"skills/btn_menu_logic.js"
+			],
+			[
+				"inter",
+				"skills/interactive_event.js"
+			],
+			[
+				"bot.j",
+				"bot.js"
+			],
+			[
+				"bot",
+				"bot.js"
+			],
+			[
+				"intera",
+				"skills/interactive_event.js"
+			],
+			[
+				"data_",
+				"skills/data_store.js"
+			],
+			[
+				"bot.",
+				"bot.js"
+			],
+			[
+				"gitig",
+				".gitignore"
+			],
+			[
+				"trigger",
+				"skills/triggers.js"
+			],
+			[
+				"packagelock",
+				"package-lock.json"
+			],
+			[
+				"model",
+				"models.js"
+			],
+			[
+				"book.j",
+				"models/Book.js"
+			],
+			[
+				"partt",
+				"lib/partTwo.js"
+			],
+			[
+				"assesarpartw",
+				"assesArbPartTwo.js"
+			],
+			[
+				"partone",
+				"lib/partOne.js"
+			],
+			[
+				"repo",
+				"repository.js"
+			],
+			[
+				"models",
+				"models.js"
+			],
+			[
+				"parttw",
+				"lib/partTwo.js"
+			],
+			[
+				"appcon",
+				"appconfig.js"
+			],
+			[
+				"db",
+				"db.js"
+			],
+			[
+				"assesparthree",
+				"assesArbPartThree.js"
+			],
+			[
+				"ase",
+				"assesArbPartOne.js"
+			],
+			[
+				"dockerfile",
+				"client/Dockerfile"
+			],
+			[
+				"read",
+				"client/README.md"
+			],
+			[
+				"secom",
+				"client/src/app/search/search.component.ts"
+			],
+			[
+				"search",
+				"client/src/app/search/search.component.html"
+			],
+			[
+				"seach",
+				"client/src/app/search.service.ts"
+			],
+			[
+				"maincom",
+				"client/src/app/main/main.component.ts"
+			],
+			[
+				"servedockig",
+				"server/.dockerignore"
+			],
+			[
+				"servdock",
+				"server/Dockerfile"
+			],
+			[
+				"readm",
+				"client/README.md"
+			],
+			[
+				"packag",
+				"client/package.json"
+			],
+			[
+				"clie/giti",
+				"client/.gitignore"
+			],
+			[
+				"dockerig",
+				"client/.dockerignore"
+			],
+			[
+				"index.js",
+				"server/index.js"
+			],
+			[
+				"config",
+				"server/config.js"
+			],
+			[
+				"searchser",
+				"client/src/app/search.service.ts"
+			],
+			[
+				"searchco",
+				"client/src/app/search/search.component.ts"
+			],
+			[
+				"main",
+				"client/src/app/main/main.component.ts"
+			],
+			[
+				"route",
+				"client/src/app/app-routing.module.ts"
+			],
+			[
+				"maincomht",
+				"client/src/app/main/main.component.html"
+			],
+			[
+				"comp",
+				"client/src/app/app.component.html"
+			],
+			[
+				"notf",
+				"client/src/app/not-found/not-found.component.html"
+			],
+			[
+				"not",
+				"client/src/app/not-found/not-found.component.ts"
+			],
+			[
+				"notfound",
+				"client/src/app/not-found/not-found.component.ts"
+			],
+			[
+				"notfou",
+				"client/src/app/not-found/not-found.component.html"
+			],
+			[
+				"appmodu",
+				"client/src/app/app.module.ts"
+			],
+			[
+				"searh",
+				"client/src/app/search/search.component.html"
+			],
+			[
+				"conten",
+				"client/src/app/content/content.component.html"
+			],
+			[
+				"tab",
+				"client/src/tab.model.ts"
+			],
+			[
+				"searcont",
+				"client/src/app/search/search.component.ts"
+			],
+			[
+				"module",
+				"client/src/app/app.module.ts"
+			],
+			[
+				"searc",
+				"client/src/app/search/search.component.html"
+			],
+			[
+				"content",
+				"client/src/app/content/content.component.ts"
+			],
+			[
+				"seaser",
+				"client/src/app/search.service.ts"
+			],
+			[
+				"angular-",
+				"client/.angular-cli.json"
+			],
+			[
+				"angu",
+				"client/.angular-cli.json"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 241.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
