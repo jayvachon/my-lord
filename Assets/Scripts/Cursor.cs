@@ -5,23 +5,29 @@ using EventSystem;
 
 public class Cursor : MonoBehaviour {
 
-	// float maxDistance = 5000f;
+	bool mouseDown = false;
 
-	void Update() {
-
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Debug.DrawRay(ray.origin, ray.direction * Mathf.Infinity, Color.yellow);
-
-		if (Input.GetMouseButtonDown(0)) {
-
-			RaycastHit[] hits = Physics.RaycastAll(ray);
-			for (int i = 0; i < hits.Length; i ++) {
-				Debug.Log (hits);
+	void LateUpdate() {
+		if (Input.GetMouseButton(0)) {
+			if (!mouseDown) {
+				MouseDown();
 			}
-			// RaycastHit hit;
-			// if (Physics.Raycast(ray, out hit, maxDistance)) {
-				// Events.instance.Raise(new ClickEvent(hit.transform));
-			// }
+			mouseDown = true;
+		}
+		if (!Input.GetMouseButton(0)) {
+			mouseDown = false;
+		}
+	}
+
+	void MouseDown() {
+		GetMouseOver();
+	}
+
+	void GetMouseOver() {
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
+			Events.instance.Raise(new ClickEvent(hit.transform));
 		}
 	}
 }
