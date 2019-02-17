@@ -4,12 +4,13 @@ using UnityEngine;
 
 public struct ValueTier
 {
-    public int level, value, rent, renovate;
+    public int level, value, rent, renovate, rooms;
 
-    public ValueTier(int _level, int _value, int _rent, int _renovate) {
+    public ValueTier(int _level, int _value, int _rent, int _renovate, int _rooms) {
     	level = _level;
     	value = _value;
     	rent = _rent;
     	renovate = _renovate;
+    	rooms = _rooms;
     }
 }

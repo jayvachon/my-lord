@@ -14,6 +14,8 @@ public class BuildingDashboard : MB
     public Text renovateText;
     public Button sellButton;
     public Text sellText;
+    public Button repairButton;
+    public Text repairText;
     public Player player;
 
     Building selectedBuilding;
@@ -36,6 +38,13 @@ public class BuildingDashboard : MB
 		}
 	}
 
+	public void RepairBuilding() {
+		if (player.Wealth >= selectedBuilding.RepairCost) {
+			Events.instance.Raise(new RepairBuildingEvent(selectedBuilding));
+			UpdateButtonStates();
+		}
+	}
+
 	public void SellBuilding() {
 		Events.instance.Raise(new SellBuildingEvent(selectedBuilding));
 		UpdateButtonStates();
@@ -54,35 +63,56 @@ public class BuildingDashboard : MB
     }
 
     void UpdateButtonStates(bool active=true) {
+		
 		buttons.SetActive(active);
-		if (active) {
-			switch(selectedBuilding.State) {
-				case Building.BuildingState.ForSale:
-		    		buyButton.gameObject.SetActive(true);
-		    		renovateButton.gameObject.SetActive(false);
-		    		sellButton.gameObject.SetActive(false);
-			    	buyButton.interactable = player.Wealth >= selectedBuilding.Tier.value;
-			    	break;
-			    case Building.BuildingState.Owned:
-				    buyButton.gameObject.SetActive(false);
-				    if (selectedBuilding.Tier.level < Tiers.Max) {
-			    		renovateButton.gameObject.SetActive(true);
-				    	renovateButton.interactable = 
-			    			player.Wealth >= selectedBuilding.Tier.renovate;
-			    		renovateText.text = "Renovate $" + selectedBuilding.Tier.renovate.ToDisplay();
-				    } else {
-				    	renovateButton.gameObject.SetActive(false);
-				    }
+		if (!active) return;
+
+		switch(selectedBuilding.State) {
+			case Building.BuildingState.ForSale:
+	    		buyButton.gameObject.SetActive(true);
+	    		renovateButton.gameObject.SetActive(false);
+	    		sellButton.gameObject.SetActive(false);
+	    		repairButton.gameObject.SetActive(false);
+		    	buyButton.interactable = player.Wealth >= selectedBuilding.Tier.value;
+		    	break;
+		    case Building.BuildingState.Owned:
+			    buyButton.gameObject.SetActive(false);
+
+			    bool needsRepairs = selectedBuilding.RepairCost > 0;
+
+			    // Repair
+			    if (needsRepairs) {
+			    	repairButton.gameObject.SetActive(true);
+				    sellButton.gameObject.SetActive(false);
+				    repairButton.interactable = 
+		    			player.Wealth >= selectedBuilding.RepairCost;
+			    	repairText.text = "Fix $" + selectedBuilding.RepairCost.ToDisplay();
+			    }
+
+			    // Sell (cannot sell without fixing your shit)
+			    else {
+			    	repairButton.gameObject.SetActive(false);
 				    sellButton.gameObject.SetActive(true);
 				    sellText.text = "Sell $" + selectedBuilding.Tier.value.ToDisplay();
-			    	break;
-			    case Building.BuildingState.Renovating:
-			    	buttons.SetActive(false);
-		    		break;
-				default:
-					buttons.SetActive(false);
-					break;		
-			}
+			    }
+
+			    // Renovate
+			    if (selectedBuilding.Tier.level < Tiers.Max) {
+		    		renovateButton.gameObject.SetActive(true);
+			    	renovateButton.interactable = 
+		    			player.Wealth >= selectedBuilding.Tier.renovate;
+		    		renovateText.text = "Renovate $" + selectedBuilding.Tier.renovate.ToDisplay();
+			    } else {
+			    	renovateButton.gameObject.SetActive(false);
+			    }
+
+		    	break;
+		    case Building.BuildingState.Renovating:
+		    	buttons.SetActive(false);
+	    		break;
+			default:
+				buttons.SetActive(false);
+				break;		
 		}
 	}
 

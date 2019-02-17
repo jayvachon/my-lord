@@ -24,6 +24,7 @@ public class Player : MB
         Events.instance.AddListener<RenovateBuildingEvent>(OnRenovateBuildingEvent);
     	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
         Events.instance.AddListener<SellBuildingEvent>(OnSellBuildingEvent);
+        Events.instance.AddListener<RepairBuildingEvent>(OnRepairBuildingEvent);
     }
 
     void OnBuyBuildingEvent(BuyBuildingEvent e) {
@@ -37,11 +38,15 @@ public class Player : MB
 
     void OnNewMonthEvent(NewMonthEvent e) {
 		foreach(Building b in buildings) {
-			wealth += b.Tier.rent;
+			wealth += b.State == Building.BuildingState.Owned ? b.Tier.rent : 0;
 		}
 	}
 
     void OnSellBuildingEvent(SellBuildingEvent e) {
         wealth += e.Building.Tier.value;
+    }
+
+    void OnRepairBuildingEvent(RepairBuildingEvent e) {
+        wealth -= e.Building.RepairCost;
     }
 }
