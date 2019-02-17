@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public class Player : MonoBehaviour
+public class Player : MB
 {
     int wealth = 3000000;
     public int Wealth {
@@ -19,10 +19,11 @@ public class Player : MonoBehaviour
 
     List<Building> buildings = new List<Building>();
 
-    void Awake() {
+    protected override void AddListeners() {
     	Events.instance.AddListener<BuyBuildingEvent>(OnBuyBuildingEvent);
         Events.instance.AddListener<RenovateBuildingEvent>(OnRenovateBuildingEvent);
     	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
+        Events.instance.AddListener<SellBuildingEvent>(OnSellBuildingEvent);
     }
 
     void OnBuyBuildingEvent(BuyBuildingEvent e) {
@@ -39,4 +40,8 @@ public class Player : MonoBehaviour
 			wealth += b.Tier.rent;
 		}
 	}
+
+    void OnSellBuildingEvent(SellBuildingEvent e) {
+        wealth += e.Building.Tier.value;
+    }
 }

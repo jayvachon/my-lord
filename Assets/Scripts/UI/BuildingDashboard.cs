@@ -12,6 +12,8 @@ public class BuildingDashboard : MB
     public Button buyButton;
     public Button renovateButton;
     public Text renovateText;
+    public Button sellButton;
+    public Text sellText;
     public Player player;
 
     Building selectedBuilding;
@@ -34,6 +36,11 @@ public class BuildingDashboard : MB
 		}
 	}
 
+	public void SellBuilding() {
+		Events.instance.Raise(new SellBuildingEvent(selectedBuilding));
+		UpdateButtonStates();
+	}
+
     void Enable() {
     	background.enabled = true;
     	value.enabled = true;
@@ -53,6 +60,7 @@ public class BuildingDashboard : MB
 				case Building.BuildingState.ForSale:
 		    		buyButton.gameObject.SetActive(true);
 		    		renovateButton.gameObject.SetActive(false);
+		    		sellButton.gameObject.SetActive(false);
 			    	buyButton.interactable = player.Wealth >= selectedBuilding.Tier.value;
 			    	break;
 			    case Building.BuildingState.Owned:
@@ -61,11 +69,16 @@ public class BuildingDashboard : MB
 			    		renovateButton.gameObject.SetActive(true);
 				    	renovateButton.interactable = 
 			    			player.Wealth >= selectedBuilding.Tier.renovate;
-			    		renovateText.text = "Renovate $" + selectedBuilding.Tier.renovate;
+			    		renovateText.text = "Renovate $" + selectedBuilding.Tier.renovate.ToDisplay();
 				    } else {
 				    	renovateButton.gameObject.SetActive(false);
 				    }
+				    sellButton.gameObject.SetActive(true);
+				    sellText.text = "Sell $" + selectedBuilding.Tier.value.ToDisplay();
 			    	break;
+			    case Building.BuildingState.Renovating:
+			    	buttons.SetActive(false);
+		    		break;
 				default:
 					buttons.SetActive(false);
 					break;		
@@ -74,7 +87,7 @@ public class BuildingDashboard : MB
 	}
 
 	void UpdateDisplayText() {
-		value.text = "$" + selectedBuilding.Tier.value.ToString();
+		value.text = "$" + selectedBuilding.Tier.value.ToDisplay();
 	}
 
     protected override void AddListeners() {

@@ -13,8 +13,8 @@ public class PlayerDashboard : MonoBehaviour
 	public Text progress;
 
 	void Update() {
-		wealth.text = "Wealth: $" + player.Wealth.ToString();
-		monthlyRevenue.text = "Monthly Revenue: $" + player.MonthlyRevenue.ToString();
+		wealth.text = "Wealth: $" + player.Wealth.ToDisplay();
+		monthlyRevenue.text = "Monthly Revenue: $" + player.MonthlyRevenue.ToDisplay();
 		// progress.text = (Mathf.Round(clock.Progress*100)).ToString() + "%";
 	}
 

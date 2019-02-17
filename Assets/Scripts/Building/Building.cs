@@ -76,6 +76,7 @@ public class Building : Clickable {
 		Events.instance.AddListener<BuyBuildingEvent>(OnBuyBuildingEvent);
 		Events.instance.AddListener<RenovateBuildingEvent>(OnRenovateBuildingEvent);
 		Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
+		Events.instance.AddListener<SellBuildingEvent>(OnSellBuildingEvent);
 	}
 
 	void SetState(BuildingState state) {
@@ -113,6 +114,12 @@ public class Building : Clickable {
  	void OnRenovateBuildingEvent(RenovateBuildingEvent e) {
  		if (e.Building == this) {
  			SetState(BuildingState.Renovating);
+ 		}
+ 	}
+
+ 	void OnSellBuildingEvent(SellBuildingEvent e) {
+ 		if (e.Building == this) {
+ 			SetState(BuildingState.NotForSale);
  		}
  	}
 
