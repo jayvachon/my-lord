@@ -5,10 +5,10 @@ namespace EventSystem {
 
 	public class ClickEvent : GameEvent {
 
-		public readonly Transform transform;
+		public readonly Transform Transform;
 
-		public ClickEvent (Transform _transform) {
-			transform = _transform;
+		public ClickEvent (Transform transform) {
+			Transform = transform;
 		}
 	}
 }

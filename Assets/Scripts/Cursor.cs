@@ -24,9 +24,15 @@ public class Cursor : MonoBehaviour {
 	}
 
 	void GetMouseOver() {
+
+		// If the mouse is over the UI, don't raycast
+		if (Input.mousePosition.y <= 100) {
+			return;
+		}
+		
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
 			Events.instance.Raise(new ClickEvent(hit.transform));
 		}
 	}

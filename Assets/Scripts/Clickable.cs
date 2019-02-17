@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public abstract class Clickable : MonoBehaviour, IClickable {
+public abstract class Clickable : MB, IClickable {
 
-	void Awake() {
+	protected override void AddListeners() {
 		Events.instance.AddListener<ClickEvent>(OnClickEvent);
 	}
 
-	void OnMouseOver() {
-		/*if (Input.GetMouseButtonDown(0)) {
-			Events.instance.Raise(new ClickEvent(transform));
-		}*/
-	}
-
 	void OnClickEvent(ClickEvent e) {
-		if (e.transform == transform) {
+		if (e.Transform == transform) {
 			ClickThis();
 		} else {
 			ClickOther();
