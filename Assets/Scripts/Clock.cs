@@ -3,23 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-// Real-time clock. Might deprecate this if I go with turn-based.
-
 public class Clock : MonoBehaviour
 {
 	public float Progress {
-		get { return progress / month; }
+		get { return progress / monthTime; }
 	}
 
-	const float month = 10f;
+	public string CurrentMonth {
+		get { return months[monthIndex]; }
+	}
+
+	string[] months = new string[] {
+		"January", "February", "March", "April", 
+		"May", "June", "July", "August", 
+		"September", "October", "November", "December"
+	};
+
+	const float monthTime = 3f;
 	float progress = 0f;
+	int monthIndex = 0;
 
 	void Update() {
-		if (progress < month) {
+		if (progress < monthTime) {
 			progress += Time.deltaTime;
 		} else {
+
+			if (monthIndex < 11) {
+				monthIndex ++;
+			} else {
+				monthIndex = 0;
+			}
+
 			progress = 0f;
-			// Events.instance.Raise(new NewMonthEvent());
+			Events.instance.Raise(new NewMonthEvent());
 		}
 	}
 }

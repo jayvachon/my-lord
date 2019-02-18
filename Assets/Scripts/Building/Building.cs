@@ -9,7 +9,8 @@ public class Building : Clickable {
 		NotForSale,
 		ForSale,
 		Owned,
-		Renovating
+		Renovating,
+		Unlivable
 	}
 
 	public Material notForSaleMaterial;
@@ -22,26 +23,33 @@ public class Building : Clickable {
 	public GameObject firstWarning;
 	public GameObject secondWarning;
 	public GameObject thirdWarning;
+	public GameObject unlivableIndicator;
 
 	public bool Selected { get; private set; }
 	public BuildingState State { get; private set; }
 	public ValueTier Tier { get; private set; }
 	
 	public List<Tenant> Tenants {
-		get {
-			return tenants;
-		}
+		get { return tenants; }
+	}
+	public bool HasTenants {
+		get { return tenants.Count > 0; }
 	}
 
 	public int RepairCost {
-		get {
-			return repairsNeeded * 500;
-		}
+		get { return repairsNeeded * 500; }
+	}
+	public bool NeedsRepairs {
+		get { return repairsNeeded > 0; }
+	}
+
+	public int TotalRent {
+		get { return tenants.Count * Tier.rent; }
 	}
 
 	List<Tenant> tenants = new List<Tenant>();
 	int repairsNeeded = 0;
-	int renovationTimer = 3; // Time in months
+	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
 
 	public void Init(ValueTier tier) {
@@ -49,12 +57,24 @@ public class Building : Clickable {
 		Tier = tier;
 		SetState(BuildingState.NotForSale);
 		UpdateDisplayValue();
-
-		for (int i = 0; i < Tier.rooms; i ++) {
-			tenants.Add(new Tenant());
-		}
-
+		FillTenants();
 		RemoveRepairs();
+	}
+
+	public void UpdateRent(int rent) {
+		Tier.rent = rent;
+		foreach(Tenant t in tenants) {
+			t.Rent = Tier.rent;
+		}
+	}
+
+	void FillTenants() {
+		for (int i = 0; i < Tier.rooms; i ++) {
+			tenants.Add(new Tenant {
+				Name = "Rosa",
+				Rent = Tier.rent
+			});
+		}
 	}
 
 	void UpdateDisplayValue() {
@@ -65,7 +85,9 @@ public class Building : Clickable {
 		if (repairsNeeded < 3) {
 			repairsNeeded ++;
 		} else {
-			RemoveRepairs();
+			repairsNeeded ++;
+			RemoveTenants();
+			SetState(BuildingState.Unlivable);
 		}
 
 		switch(repairsNeeded) {
@@ -73,16 +95,25 @@ public class Building : Clickable {
 				firstWarning.gameObject.SetActive(true);
 				secondWarning.gameObject.SetActive(false);
 				thirdWarning.gameObject.SetActive(false);
+				unlivableIndicator.gameObject.SetActive(false);
 				break;
 			case 2:
 				firstWarning.gameObject.SetActive(false);
 				secondWarning.gameObject.SetActive(true);
 				thirdWarning.gameObject.SetActive(false);
+				unlivableIndicator.gameObject.SetActive(false);
 				break;
 			case 3:
 				firstWarning.gameObject.SetActive(false);
 				secondWarning.gameObject.SetActive(false);
 				thirdWarning.gameObject.SetActive(true);
+				unlivableIndicator.gameObject.SetActive(false);
+				break;
+			case 4:
+				firstWarning.gameObject.SetActive(false);
+				secondWarning.gameObject.SetActive(false);
+				thirdWarning.gameObject.SetActive(false);
+				unlivableIndicator.gameObject.SetActive(true);
 				break;
 		}
 		
@@ -93,6 +124,11 @@ public class Building : Clickable {
 		firstWarning.gameObject.SetActive(false);
 		secondWarning.gameObject.SetActive(false);
 		thirdWarning.gameObject.SetActive(false);
+		unlivableIndicator.gameObject.SetActive(false);
+	}
+
+	void RemoveTenants() {
+		tenants.Clear();
 	}
 
 	#region Clickable
@@ -152,6 +188,7 @@ public class Building : Clickable {
 			case BuildingState.ForSale:
 				unselectedMaterial = forSaleMaterial;
 				break;
+			case BuildingState.Unlivable:
 			case BuildingState.Owned:
 				unselectedMaterial = ownedMaterial;
 				break;
@@ -173,6 +210,7 @@ public class Building : Clickable {
  	void OnRenovateBuildingEvent(RenovateBuildingEvent e) {
  		if (e.Building == this) {
  			SetState(BuildingState.Renovating);
+ 			RemoveRepairs();
  		}
  	}
 
@@ -194,14 +232,16 @@ public class Building : Clickable {
 
  		switch(State) {
 	 		case BuildingState.NotForSale:
-	 			change = Random.Range(0, 40) == 0;
+	 			change = Random.Range(0, 72) == 0;
 	 			if (change) {
+	 				if (Selected) Deselect();
 	 				SetState(BuildingState.ForSale);
 	 			}
 	 			break;
 	 		case BuildingState.ForSale:
-	 			change = Random.Range(0, 3) == 0;
+	 			change = Random.Range(0, 6) == 0;
 	 			if (change) {
+	 				if (Selected) Deselect();
 	 				SetState(BuildingState.NotForSale);
 	 			}
 	 			break;
@@ -209,17 +249,33 @@ public class Building : Clickable {
 	 			if (renovationTimer > 0) {
 	 				renovationTimer --;
 	 			} else {
-	 				renovationTimer = 3;
+	 				renovationTimer = 6;
 	 				Tier = Tiers.Tier[Tier.level + 1];
 	 				UpdateDisplayValue();
+	 				FillTenants();
 	 				SetState(BuildingState.Owned);
 	 				Events.instance.Raise(new UpgradeBuildingEvent(this));
 	 			}
 	 			break;
 	 		case BuildingState.Owned:
-	 			bool needRepairs = Random.Range(0, 20) == 0;
+	 			bool needRepairs = Random.Range(0, 6) == 0;
 	 			if (needRepairs) {
 	 				AddRepair();
+	 			}
+	 			if (repairsNeeded > 0) {
+	 				if (tenants.Count > 0) {
+	 					bool tenantMoveOut = Random.Range(0, 6) == 0;
+	 					if (tenantMoveOut) {
+	 						tenants.RemoveAt(0);
+	 					}
+	 				}
+	 			} else {
+	 				if (tenants.Count < Tier.rooms) {
+	 					bool tenantMoveIn = Random.Range(0, 6) == 0;
+	 					if (tenantMoveIn) {
+	 						tenants.Add(new Tenant());
+	 					}
+	 				}
 	 			}
 	 			break;
 	 		default: break;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ValueTier
+public class ValueTier
 {
     public int level, value, rent, renovate, rooms;
 

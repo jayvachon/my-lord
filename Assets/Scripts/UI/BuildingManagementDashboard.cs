@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using EventSystem;
 
-public class BuildingManagementDashboard : MB
+public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable
 {
     public GameObject dashboard;
+    public InputField rent; 
+    public TenantList tenantList;
 
     void Start() {
     	Disable();
@@ -19,16 +22,33 @@ public class BuildingManagementDashboard : MB
     	dashboard.gameObject.SetActive(false);
     }
 
-    protected override void AddListeners() {
-    	Events.instance.AddListener<SelectBuildingEvent>(OnSelectBuildingEvent);
-    	Events.instance.AddListener<DeselectBuildingEvent>(OnDeselectBuildingEvent);
+    public void Refresh() {
+        if (SelectedBuilding.State != Building.BuildingState.NotForSale && SelectedBuilding.State != Building.BuildingState.ForSale) {
+            rent.gameObject.SetActive(true);
+            tenantList.gameObject.SetActive(true);
+            rent.text = SelectedBuilding.Tier.rent.ToString();
+            tenantList.Refresh();
+        } else {
+            rent.gameObject.SetActive(false);
+            tenantList.gameObject.SetActive(false);
+        }
     }
 
-    void OnSelectBuildingEvent(SelectBuildingEvent e) {
+    public void AcceptRentUpdate() {
+        SelectedBuilding.UpdateRent(int.Parse(rent.text));
+        Refresh();
+    }
+
+    public void RejectRentUpdate() {
+        Refresh();
+    }
+
+    protected override void OnSelect() {
+        Refresh();
     	Enable();
     }
 
-    void OnDeselectBuildingEvent(DeselectBuildingEvent e) {
-    	Disable();
+    protected override void OnDeselect() {
+        Disable();
     }
 }

@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"prog",
+				"progress.text"
+			],
+			[
+				"te",
+				"tenants.Count"
+			],
+			[
+				"ActivateR",
+				"ActivateRenovateButton"
+			],
+			[
+				"Upda",
+				"UpdateDisplayText"
+			],
+			[
+				"reno",
+				"renovationTimer"
+			],
+			[
+				"Rotate",
+				"Transform.Rotate(eulerAngles, relativeTo)"
+			],
+			[
+				"GetM",
+				"GetMouseOver"
+			],
+			[
+				"GetMouse",
+				"GetMouseButtonDown"
+			],
+			[
 				"Proposed",
 				"ProposedSalary"
 			],
@@ -28,10 +60,28 @@
 	"buffers":
 	[
 		{
-			"file": "Assets/Scripts/CameraAxle.cs",
+			"file": "Assets/Scripts/Building/Building.cs",
 			"settings":
 			{
-				"buffer_size": 242,
+				"buffer_size": 6454,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Assets/Scripts/UI/BuildingManagementDashboard.cs",
+			"settings":
+			{
+				"buffer_size": 739,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Tenant.cs",
+			"settings":
+			{
+				"buffer_size": 130,
 				"encoding": "UTF-8 with BOM",
 				"line_ending": "Windows"
 			}
@@ -49,12 +99,20 @@
 		"selected_items":
 		[
 			[
-				"editp",
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"edit",
 				"Project: Edit Project"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
+				"editp",
+				"Project: Edit Project"
 			],
 			[
 				"editpr",
@@ -75,10 +133,6 @@
 			[
 				"REIND",
 				"Indentation: Reindent Lines"
-			],
-			[
-				"edit",
-				"Project: Edit Project"
 			],
 			[
 				"rein",
@@ -193,10 +247,6 @@
 				"Material Theme: Configuration"
 			],
 			[
-				"settings",
-				"Preferences: Settings"
-			],
-			[
 				"instal",
 				"Package Control: Install Package"
 			],
@@ -225,8 +275,43 @@
 		"side_bar_visible": true,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/jay/unity/my-lord/Assets/Scripts"
+	],
 	"file_history":
 	[
+		"/Users/jay/unity/my-lord/Assets/Scripts/UI/BuildingDashboard.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building/BuildingSeeder.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Player.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/UI/PlayerDashboard.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Utilities/ExtensionMethods.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Clock.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building/Tiers.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/DeselectBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Clickable.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/UI/BuildingManagementDashboard.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building/ValueTier.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/RepairBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/BuyBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Tenant.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building/BuildingStateIndicator.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Utilities/MB.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Cursor.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/SellBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/RenovateBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/UpgradeBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building/OwnedIndicator.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/UI/Dashboard.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/NewMonthEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/ClickEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Utilities/GameObjectPool.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Building.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/SelectBuildingEvent.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/DeselectBuilding.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/Events/SelectBuilding.cs",
+		"/Users/jay/unity/my-lord/Assets/Scripts/CameraAxle.cs",
+		"/Users/jay/unity/my-lord/my-lord.sublime-project",
 		"/Users/jay/node/order-background-check/.zapierapprc",
 		"/Users/jay/node/order-background-check/package.json",
 		"/Users/jay/node/order-background-check/samples/sample_order.js",
@@ -323,48 +408,18 @@
 		"/Users/jay/node/kelele/server/Dockerfile",
 		"/Users/jay/node/kelele/server/.dockerignore",
 		"/Users/jay/node/kelele/.gitignore",
-		"/Users/jay/node/kelele/Dockerfile",
-		"/Users/jay/node/kelele/server/config.js",
-		"/Users/jay/node/kelele/client/src/app/search/search.component.ts",
-		"/Users/jay/node/kelele/client/src/app/app.component.html",
-		"/Users/jay/node/kelele/client/src/app/app.component.ts",
-		"/Users/jay/node/kelele/client/src/app/main/main.component.html",
-		"/Users/jay/node/kelele/client/src/app/main/main.component.ts",
-		"/Users/jay/node/kelele/client/src/main.ts",
-		"/Users/jay/node/kelele/client/src/app/not-found/not-found.component.html",
-		"/Users/jay/node/kelele/client/src/app/content/content.component.html",
-		"/Users/jay/node/kelele/client/src/app/not-found/not-found.component.ts",
-		"/Users/jay/node/kelele/client/src/index.html",
-		"/Users/jay/node/kelele/client/src/app/content/content.component.ts",
-		"/Users/jay/node/kelele/client/src/app/search/search.component.html",
-		"/Users/jay/node/kelele/client/src/tab.model.ts",
-		"/Users/jay/node/kelele/client/.angular-cli.json",
-		"/Users/jay/node/kelele/client/src/_variables.scss",
-		"/Users/jay/node/kelele/client/src/styles.scss",
-		"/Users/jay/node/kelele/client/src/app/search-results/search-results.component.ts",
-		"/Users/jay/node/kelele/client/src/app/search.service.spec.ts",
-		"/Users/jay/node/kelele/client/src/app/fetcher.service.ts",
-		"/Users/jay/node/kelele/kelele.sublime-project",
-		"/Users/jay/Developer/repositories/tablib/client/src/app/app.component.ts",
-		"/Users/jay/Developer/repositories/tablib/client/src/app/app.component.html",
-		"/Users/jay/Developer/repositories/tablib/tablib.sublime-project",
-		"/Users/jay/Developer/repositories/tablib/client/src/typings.d.ts",
-		"/Users/jay/Developer/repositories/tablib/client/src/index.html",
-		"/Users/jay/Developer/repositories/tablib/client/server/config.js.template",
-		"/Users/jay/Developer/repositories/tablib/client/tsconfig.json",
-		"/Users/jay/Developer/repositories/tablib/client/src/main.ts",
-		"/Users/jay/Developer/repositories/tablib/.gitignore",
-		"/Users/jay/Developer/repositories/tablib/client/typings.json"
+		"/Users/jay/node/kelele/Dockerfile"
 	],
 	"find":
 	{
-		"height": 70.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
 		"height": 158.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -372,6 +427,105 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"float",
+			"month",
+			"Round",
+			"*1.0f",
+			"deselect",
+			"deselectbuildingevent",
+			"true",
+			"addrepair",
+			"6000",
+			"4500",
+			"3600",
+			"3000",
+			"1500",
+			"true",
+			"false",
+			"true",
+			"updatedisplaytext",
+			"value",
+			"RemoveAll",
+			"Clear",
+			"needsRepairs",
+			"repaircost",
+			"true",
+			"renovateButton",
+			"Buy",
+			"fixButton",
+			"true",
+			"false",
+			"true",
+			"false",
+			"true",
+			"false",
+			"BuildingStateIndicator",
+			"mesh",
+			"unselected",
+			"false",
+			"Awake",
+			"void",
+			"MonoBehaviour",
+			"tostring",
+			"void",
+			"MonoBehaviour",
+			"BuyBuildingEvent",
+			"renovateButton",
+			"true",
+			"Renovate",
+			"RenovateBuildingEvent",
+			"updatedisplay",
+			"Awake",
+			"MonoBehaviour",
+			"value",
+			"MonoBehaviour",
+			"Top",
+			"tiers",
+			"true",
+			"SetButtonStates",
+			"BuyBuildingEvent",
+			"int",
+			"rent",
+			"Value",
+			"int",
+			"values",
+			"rent",
+			"Value",
+			"readonly",
+			"false",
+			"true",
+			"false",
+			"Start",
+			"public",
+			"true",
+			"false",
+			"Awake",
+			"clock",
+			"timer",
+			"ClickEvent",
+			"state.",
+			"selectedBuilding",
+			"events.instance.raise",
+			"building",
+			"selectedBuilding",
+			">()",
+			"enabled",
+			"    \tbackground.enabled = false;\n",
+			"enabled",
+			"false",
+			"void",
+			"IEnumerator",
+			"events.instance.",
+			"ClickEvent",
+			"_transform",
+			"selected",
+			"false",
+			"000000",
+			"TextMesh",
+			"Awake",
+			"e",
+			"debug.log",
+			"log"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -394,11 +548,40 @@
 			[
 				{
 					"buffer": 0,
-					"file": "Assets/Scripts/CameraAxle.cs",
+					"file": "Assets/Scripts/Building/Building.cs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 242,
+						"buffer_size": 6454,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3155,
+								3155
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Assets/Scripts/UI/BuildingManagementDashboard.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 739,
 						"regions":
 						{
 						},
@@ -411,13 +594,43 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.sublime-syntax"
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Assets/Scripts/Tenant.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								126,
+								126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -475,6 +688,202 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"tena",
+				"Tenant.cs"
+			],
+			[
+				"buildingma",
+				"UI/BuildingManagementDashboard.cs"
+			],
+			[
+				"clock",
+				"Clock.cs"
+			],
+			[
+				"p",
+				"Player.cs"
+			],
+			[
+				"tiers",
+				"Building/Tiers.cs"
+			],
+			[
+				"ex",
+				"Utilities/ExtensionMethods.cs"
+			],
+			[
+				"buldseed",
+				"Building/BuildingSeeder.cs"
+			],
+			[
+				"tier",
+				"Building/Tiers.cs"
+			],
+			[
+				"cloc",
+				"Clock.cs"
+			],
+			[
+				"des",
+				"Events/DeselectBuildingEvent.cs"
+			],
+			[
+				"play",
+				"UI/PlayerDashboard.cs"
+			],
+			[
+				"valu",
+				"Building/ValueTier.cs"
+			],
+			[
+				"pl",
+				"Player.cs"
+			],
+			[
+				"buyb",
+				"Events/BuyBuildingEvent.cs"
+			],
+			[
+				"repa",
+				"Events/RepairBuildingEvent.cs"
+			],
+			[
+				"statin",
+				"Building/BuildingStateIndicator.cs"
+			],
+			[
+				"mb",
+				"Utilities/MB.cs"
+			],
+			[
+				"clicka",
+				"Clickable.cs"
+			],
+			[
+				"curs",
+				"Cursor.cs"
+			],
+			[
+				"tenan",
+				"Tenant.cs"
+			],
+			[
+				"buildman",
+				"UI/BuildingManagementDashboard.cs"
+			],
+			[
+				"exten",
+				"Utilities/ExtensionMethods.cs"
+			],
+			[
+				"buy",
+				"Events/BuyBuildingEvent.cs"
+			],
+			[
+				"sell",
+				"Events/SellBuildingEvent.cs"
+			],
+			[
+				"reno",
+				"Events/RenovateBuildingEvent.cs"
+			],
+			[
+				"u",
+				"Events/UpgradeBuildingEvent.cs"
+			],
+			[
+				"m",
+				"Utilities/MB.cs"
+			],
+			[
+				"owned",
+				"Building/OwnedIndicator.cs"
+			],
+			[
+				"playdas",
+				"UI/PlayerDashboard.cs"
+			],
+			[
+				"build",
+				"UI/BuildingDashboard.cs"
+			],
+			[
+				"biu",
+				"Building/Building.cs"
+			],
+			[
+				"buildsee",
+				"Building/BuildingSeeder.cs"
+			],
+			[
+				"plada",
+				"UI/PlayerDashboard.cs"
+			],
+			[
+				"dash",
+				"UI/Dashboard.cs"
+			],
+			[
+				"clickeve",
+				"Events/ClickEvent.cs"
+			],
+			[
+				"newmon",
+				"Events/NewMonthEvent.cs"
+			],
+			[
+				"builsee",
+				"Building/BuildingSeeder.cs"
+			],
+			[
+				"gameo",
+				"Utilities/GameObjectPool.cs"
+			],
+			[
+				"buildinse",
+				"Building/BuildingSeeder.cs"
+			],
+			[
+				"building",
+				"Building/Building.cs"
+			],
+			[
+				"bu",
+				"Events/BuyBuildingEvent.cs"
+			],
+			[
+				"selec",
+				"Events/SelectBuildingEvent.cs"
+			],
+			[
+				"sele",
+				"Events/SelectBuildingEvent.cs"
+			],
+			[
+				"curso",
+				"Cursor.cs"
+			],
+			[
+				"clicev",
+				"Events/ClickEvent.cs"
+			],
+			[
+				"buildda",
+				"UI/BuildingDashboard.cs"
+			],
+			[
+				"dashb",
+				"UI/Dashboard.cs"
+			],
+			[
+				"click",
+				"Clickable.cs"
+			],
+			[
+				"buil",
+				"Building.cs"
+			],
 			[
 				"zap",
 				".zapierapprc"
@@ -606,14 +1015,6 @@
 			[
 				"hell",
 				"pages/posts/another-hello-world.mdx"
-			],
-			[
-				"buil",
-				"build_post_index.js"
-			],
-			[
-				"build",
-				"build_post_index.js"
 			],
 			[
 				"",
@@ -798,194 +1199,6 @@
 			[
 				"packagelock",
 				"package-lock.json"
-			],
-			[
-				"model",
-				"models.js"
-			],
-			[
-				"book.j",
-				"models/Book.js"
-			],
-			[
-				"partt",
-				"lib/partTwo.js"
-			],
-			[
-				"assesarpartw",
-				"assesArbPartTwo.js"
-			],
-			[
-				"partone",
-				"lib/partOne.js"
-			],
-			[
-				"repo",
-				"repository.js"
-			],
-			[
-				"models",
-				"models.js"
-			],
-			[
-				"parttw",
-				"lib/partTwo.js"
-			],
-			[
-				"appcon",
-				"appconfig.js"
-			],
-			[
-				"db",
-				"db.js"
-			],
-			[
-				"assesparthree",
-				"assesArbPartThree.js"
-			],
-			[
-				"ase",
-				"assesArbPartOne.js"
-			],
-			[
-				"dockerfile",
-				"client/Dockerfile"
-			],
-			[
-				"read",
-				"client/README.md"
-			],
-			[
-				"secom",
-				"client/src/app/search/search.component.ts"
-			],
-			[
-				"search",
-				"client/src/app/search/search.component.html"
-			],
-			[
-				"seach",
-				"client/src/app/search.service.ts"
-			],
-			[
-				"maincom",
-				"client/src/app/main/main.component.ts"
-			],
-			[
-				"servedockig",
-				"server/.dockerignore"
-			],
-			[
-				"servdock",
-				"server/Dockerfile"
-			],
-			[
-				"readm",
-				"client/README.md"
-			],
-			[
-				"packag",
-				"client/package.json"
-			],
-			[
-				"clie/giti",
-				"client/.gitignore"
-			],
-			[
-				"dockerig",
-				"client/.dockerignore"
-			],
-			[
-				"index.js",
-				"server/index.js"
-			],
-			[
-				"config",
-				"server/config.js"
-			],
-			[
-				"searchser",
-				"client/src/app/search.service.ts"
-			],
-			[
-				"searchco",
-				"client/src/app/search/search.component.ts"
-			],
-			[
-				"main",
-				"client/src/app/main/main.component.ts"
-			],
-			[
-				"route",
-				"client/src/app/app-routing.module.ts"
-			],
-			[
-				"maincomht",
-				"client/src/app/main/main.component.html"
-			],
-			[
-				"comp",
-				"client/src/app/app.component.html"
-			],
-			[
-				"notf",
-				"client/src/app/not-found/not-found.component.html"
-			],
-			[
-				"not",
-				"client/src/app/not-found/not-found.component.ts"
-			],
-			[
-				"notfound",
-				"client/src/app/not-found/not-found.component.ts"
-			],
-			[
-				"notfou",
-				"client/src/app/not-found/not-found.component.html"
-			],
-			[
-				"appmodu",
-				"client/src/app/app.module.ts"
-			],
-			[
-				"searh",
-				"client/src/app/search/search.component.html"
-			],
-			[
-				"conten",
-				"client/src/app/content/content.component.html"
-			],
-			[
-				"tab",
-				"client/src/tab.model.ts"
-			],
-			[
-				"searcont",
-				"client/src/app/search/search.component.ts"
-			],
-			[
-				"module",
-				"client/src/app/app.module.ts"
-			],
-			[
-				"searc",
-				"client/src/app/search/search.component.html"
-			],
-			[
-				"content",
-				"client/src/app/content/content.component.ts"
-			],
-			[
-				"seaser",
-				"client/src/app/search.service.ts"
-			],
-			[
-				"angular-",
-				"client/.angular-cli.json"
-			],
-			[
-				"angu",
-				"client/.angular-cli.json"
 			]
 		],
 		"width": 0.0

@@ -6,15 +6,13 @@ using EventSystem;
 
 public class Player : MB
 {
-    int wealth = 3000000;
+    int wealth = 1000000;
     public int Wealth {
     	get { return wealth; }
     }
 
     public int MonthlyRevenue {
-    	get {
-    		return buildings.Sum(b => b.State == Building.BuildingState.Renovating ? 0 : b.Tier.rent);
-    	}
+    	get { return buildings.Sum(b => b.TotalRent); }
     }
 
     List<Building> buildings = new List<Building>();
@@ -38,7 +36,7 @@ public class Player : MB
 
     void OnNewMonthEvent(NewMonthEvent e) {
 		foreach(Building b in buildings) {
-			wealth += b.State == Building.BuildingState.Owned ? b.Tier.rent : 0;
+			wealth += b.State == Building.BuildingState.Owned ? b.TotalRent : 0;
 		}
 	}
 

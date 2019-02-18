@@ -8,6 +8,8 @@ public class BuildingSeeder : MonoBehaviour {
 
 	void Start() {
 
+		const float perlinScale = 0.75f;
+
 		Vector2 inheritedBuilding = new Vector2(
 			Random.Range(0, 9),
 			Random.Range(0, 4)
@@ -16,9 +18,13 @@ public class BuildingSeeder : MonoBehaviour {
 		for (int i = 0; i < 9; i ++) {
 			for (int j = 0; j < 4; j ++) {
 
+				float val = Mathf.PerlinNoise(i * perlinScale, j * perlinScale);
+				val = val.Map(0, 1, 0, Tiers.Max+1);
+				val = Mathf.Floor(val);
+
 				// Player starts the game owning one low-value building
 				bool isInheritedBuilding = (i == inheritedBuilding.x && j == inheritedBuilding.y);
-				ValueTier tier = isInheritedBuilding ? SeedValue(0) : SeedValue();
+				ValueTier tier = isInheritedBuilding ? SeedValue(0) : SeedValue((int)val);
 
 				Building building = GameObjectPool.Instantiate("Buildings", new Vector3(
 					-4 + i,

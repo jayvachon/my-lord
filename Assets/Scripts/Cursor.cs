@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public class Cursor : MonoBehaviour {
+public class Cursor : SelectBuildingListener {
 
 	bool mouseDown = false;
+	bool blockClick = false;
 
 	void LateUpdate() {
 		if (Input.GetMouseButton(0)) {
@@ -29,11 +30,22 @@ public class Cursor : MonoBehaviour {
 		if (Input.mousePosition.y <= 100) {
 			return;
 		}
+		if (blockClick && Input.mousePosition.x >= 500) {
+			return;
+		}
 		
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
 			Events.instance.Raise(new ClickEvent(hit.transform));
 		}
+	}
+
+	protected override void OnSelect() {
+		blockClick = true;
+	}
+
+	protected override void OnDeselect() {
+		blockClick = false;
 	}
 }

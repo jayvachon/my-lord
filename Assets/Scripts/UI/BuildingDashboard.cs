@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventSystem;
 
-public class BuildingDashboard : MB
+public class BuildingDashboard : SelectBuildingListener, IRefreshable
 {
 	public Image background;
     public Text value;
+    public Text tenants;
     public GameObject buttons;
     public Button buyButton;
     public Button renovateButton;
@@ -18,47 +19,54 @@ public class BuildingDashboard : MB
     public Text repairText;
     public Player player;
 
-    Building selectedBuilding;
-
     void Start() {
     	Disable();
     }
 
+    public void Refresh() {
+    	if (SelectedBuilding != null) {
+	    	UpdateDisplayText();
+	    	UpdateButtonStates();
+    	}
+    }
+
     public void BuyBuilding() {
-    	if (player.Wealth >= selectedBuilding.Tier.value) {
-    		Events.instance.Raise(new BuyBuildingEvent(selectedBuilding));
+    	if (player.Wealth >= SelectedBuilding.Tier.value) {
+    		Events.instance.Raise(new BuyBuildingEvent(SelectedBuilding));
     		UpdateButtonStates();
     	}
     }
 
     public void RenovateBuilding() {
-		if (player.Wealth >= selectedBuilding.Tier.renovate) {
-			Events.instance.Raise(new RenovateBuildingEvent(selectedBuilding));
+		if (player.Wealth >= SelectedBuilding.Tier.renovate) {
+			Events.instance.Raise(new RenovateBuildingEvent(SelectedBuilding));
 			UpdateButtonStates();
 		}
 	}
 
 	public void RepairBuilding() {
-		if (player.Wealth >= selectedBuilding.RepairCost) {
-			Events.instance.Raise(new RepairBuildingEvent(selectedBuilding));
+		if (player.Wealth >= SelectedBuilding.RepairCost) {
+			Events.instance.Raise(new RepairBuildingEvent(SelectedBuilding));
 			UpdateButtonStates();
 		}
 	}
 
 	public void SellBuilding() {
-		Events.instance.Raise(new SellBuildingEvent(selectedBuilding));
+		Events.instance.Raise(new SellBuildingEvent(SelectedBuilding));
 		UpdateButtonStates();
 	}
 
     void Enable() {
     	background.enabled = true;
     	value.enabled = true;
-    	UpdateButtonStates();
+    	tenants.enabled = true;
+    	// UpdateButtonStates();
     }
 
     void Disable() {
     	background.enabled = false;
     	value.enabled = false;
+    	tenants.enabled = false;
     	UpdateButtonStates(false);
     }
 
@@ -67,45 +75,34 @@ public class BuildingDashboard : MB
 		buttons.SetActive(active);
 		if (!active) return;
 
-		switch(selectedBuilding.State) {
+		buyButton.gameObject.SetActive(false);
+		renovateButton.gameObject.SetActive(false);
+		sellButton.gameObject.SetActive(false);
+		repairButton.gameObject.SetActive(false);
+
+		switch(SelectedBuilding.State) {
 			case Building.BuildingState.ForSale:
 	    		buyButton.gameObject.SetActive(true);
-	    		renovateButton.gameObject.SetActive(false);
-	    		sellButton.gameObject.SetActive(false);
-	    		repairButton.gameObject.SetActive(false);
-		    	buyButton.interactable = player.Wealth >= selectedBuilding.Tier.value;
+		    	buyButton.interactable = player.Wealth >= SelectedBuilding.Tier.value;
 		    	break;
 		    case Building.BuildingState.Owned:
-			    buyButton.gameObject.SetActive(false);
-
-			    bool needsRepairs = selectedBuilding.RepairCost > 0;
 
 			    // Repair
-			    if (needsRepairs) {
-			    	repairButton.gameObject.SetActive(true);
-				    sellButton.gameObject.SetActive(false);
-				    repairButton.interactable = 
-		    			player.Wealth >= selectedBuilding.RepairCost;
-			    	repairText.text = "Fix $" + selectedBuilding.RepairCost.ToDisplay();
+			    if (SelectedBuilding.NeedsRepairs) {
+			    	ActivateRepairButton();
 			    }
 
 			    // Sell (cannot sell without fixing your shit)
 			    else {
-			    	repairButton.gameObject.SetActive(false);
 				    sellButton.gameObject.SetActive(true);
-				    sellText.text = "Sell $" + selectedBuilding.Tier.value.ToDisplay();
+				    sellText.text = "Sell $" + SelectedBuilding.Tier.value.ToDisplay();
 			    }
-
-			    // Renovate
-			    if (selectedBuilding.Tier.level < Tiers.Max) {
-		    		renovateButton.gameObject.SetActive(true);
-			    	renovateButton.interactable = 
-		    			player.Wealth >= selectedBuilding.Tier.renovate;
-		    		renovateText.text = "Renovate $" + selectedBuilding.Tier.renovate.ToDisplay();
-			    } else {
-			    	renovateButton.gameObject.SetActive(false);
+		    	break;
+		    case Building.BuildingState.Unlivable:
+			    if (SelectedBuilding.Tier.level < Tiers.Max) {
+		    		ActivateRenovateButton();
 			    }
-
+		    	ActivateRepairButton();
 		    	break;
 		    case Building.BuildingState.Renovating:
 		    	buttons.SetActive(false);
@@ -116,31 +113,51 @@ public class BuildingDashboard : MB
 		}
 	}
 
+	void ActivateRepairButton() {
+    	repairButton.gameObject.SetActive(true);
+	    repairButton.interactable = 
+			player.Wealth >= SelectedBuilding.RepairCost;
+    	repairText.text = "Fix $" + SelectedBuilding.RepairCost.ToDisplay();
+	}
+
+	void ActivateRenovateButton() {
+		renovateButton.gameObject.SetActive(true);
+    	renovateButton.interactable = 
+			player.Wealth >= SelectedBuilding.Tier.renovate;
+		renovateText.text = "Renovate $" + SelectedBuilding.Tier.renovate.ToDisplay();
+	}
+
 	void UpdateDisplayText() {
-		value.text = "$" + selectedBuilding.Tier.value.ToDisplay();
+		value.text = "Building Value: $" + SelectedBuilding.Tier.value.ToDisplay();
+		tenants.text = string.Format("Tenants: {0}/{1} @ ${2}/room",
+			SelectedBuilding.Tenants.Count,
+			SelectedBuilding.Tier.rooms,
+			SelectedBuilding.Tier.rent);
 	}
 
     protected override void AddListeners() {
-    	Events.instance.AddListener<SelectBuildingEvent>(OnSelectBuildingEvent);
-    	Events.instance.AddListener<DeselectBuildingEvent>(OnDeselectBuildingEvent);
-    	Events.instance.AddListener<UpgradeBuildingEvent>(OnUpgradeBuildingEvent);
+    	base.AddListeners();
+    	// Events.instance.AddListener<UpgradeBuildingEvent>(OnUpgradeBuildingEvent);
+    	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
 	}
 
-    void OnSelectBuildingEvent(SelectBuildingEvent e) {
-		selectedBuilding = e.Building; 
-    	UpdateDisplayText();
+	protected override void OnSelect() {
+		Refresh();
 		Enable();
-    }
+	}
 
-    void OnDeselectBuildingEvent(DeselectBuildingEvent e) {
-    	selectedBuilding = null;
-    	Disable();
-    }
+	protected override void OnDeselect() {
+		Disable();
+	}
 
-    void OnUpgradeBuildingEvent(UpgradeBuildingEvent e) {
-		if (e.Building == selectedBuilding) {
+	void OnNewMonthEvent(NewMonthEvent e) {
+		Refresh();
+	}
+
+    /*void OnUpgradeBuildingEvent(UpgradeBuildingEvent e) {
+		if (e.Building == SelectedBuilding) {
 			UpdateDisplayText();
 			UpdateButtonStates();
 		}
-	}
+	}*/
 }
