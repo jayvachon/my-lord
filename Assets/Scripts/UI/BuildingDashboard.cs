@@ -135,12 +135,6 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 			SelectedBuilding.Tier.baseRent);
 	}
 
-    protected override void AddListeners() {
-    	base.AddListeners();
-    	// Events.instance.AddListener<UpgradeBuildingEvent>(OnUpgradeBuildingEvent);
-    	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
-	}
-
 	protected override void OnSelect() {
 		Refresh();
 		Enable();
@@ -150,7 +144,7 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 		Disable();
 	}
 
-	void OnNewMonthEvent(NewMonthEvent e) {
+	protected override void OnNewMonth() {
 		Refresh();
 	}
 

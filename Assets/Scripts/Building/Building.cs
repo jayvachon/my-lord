@@ -36,6 +36,9 @@ public class Building : Clickable {
 	public bool HasTenants {
 		get { return tenants.Count > 0; }
 	}
+	public Stack<Tenant> Applicants {
+		get { return applicants; }
+	}
 
 	public int RepairCost {
 		get { return repairsNeeded * 500; }
@@ -52,6 +55,7 @@ public class Building : Clickable {
 	}
 
 	List<Tenant> tenants = new List<Tenant>();
+	Stack<Tenant> applicants = new Stack<Tenant>();
 	int repairsNeeded = 0;
 	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
@@ -74,11 +78,12 @@ public class Building : Clickable {
 
 	public void EvictTenant(Tenant tenant) {
 		tenants.Remove(tenant);
+		TenantManager.Destroy(tenant);
 	}
 
 	void FillTenants() {
 		for (int i = 0; i < Tier.rooms; i ++) {
-			tenants.Add(new Tenant(Tier.baseRent));
+			tenants.Add(TenantManager.Create(PerRoomRent));
 		}
 	}
 
@@ -282,6 +287,20 @@ public class Building : Clickable {
 	 			int repairsNeeded = tenants.Sum(t => t.NeedRepair ? 1 : 0);
 	 			DisplayRepairs(Mathf.Min(1, repairsNeeded));
 	 			
+	 			if (tenants.Count < Tier.rooms) {
+	 				bool newApplicant = Random.Range(0, 12) == 0;
+	 				if (newApplicant) {
+	 					applicants.Push(TenantManager.Create(PerRoomRent));
+	 				}
+	 			}
+
+	 			if (TotalRent > 0) {
+	 				// Tried to do a simple effect. failed. 
+	 				/*Transform c = GameObjectPool.Instantiate("Coins", transform.position);
+	 				c.SetParent(transform);
+	 				c.position = Vector3.zero;*/
+	 			}
+
 	 			/*bool needRepairs = Random.Range(0, 6) == 0;
 	 			if (needRepairs) {
 	 				AddRepair();

@@ -15,9 +15,9 @@ public class TenantDetails : MB, IRefreshable
 
     Building building;
 	Tenant tenant;
-    TenantList list;
+    PersonList list;
 
-    public void Init(Building _building, Tenant _tenant, TenantList _list) {
+    public void Init(Building _building, Tenant _tenant, PersonList _list) {
         building = _building;
     	tenant = _tenant;
         list = _list;

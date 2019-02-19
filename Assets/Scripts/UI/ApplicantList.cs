@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using EventSystem;
 
-public class TenantList : PersonList
+public class ApplicantList : PersonList
 {
 	protected override string TabText {
 		get {
-			return string.Format("Tenants ({0}/{1})",
-				SelectedBuilding.Tenants.Count,
-				SelectedBuilding.Tier.rooms);
+			return string.Format("Applicants ({0})",
+				SelectedBuilding.Applicants.Count);
 		}
 	}
 
 	protected override void OnSelect() {
-    	foreach(Tenant tenant in SelectedBuilding.Tenants) {
+    	foreach(Tenant tenant in SelectedBuilding.Applicants) {
     		CreateTenantDetails(tenant);
     	}
     }

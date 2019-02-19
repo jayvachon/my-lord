@@ -10,6 +10,7 @@ public abstract class SelectBuildingListener : MB
     protected override void AddListeners() {
     	Events.instance.AddListener<SelectBuildingEvent>(OnSelectBuildingEvent);
     	Events.instance.AddListener<DeselectBuildingEvent>(OnDeselectBuildingEvent);
+        Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
     }
 
     protected void OnSelectBuildingEvent(SelectBuildingEvent e) {
@@ -22,6 +23,11 @@ public abstract class SelectBuildingListener : MB
     	OnDeselect();
     }
 
+    protected void OnNewMonthEvent(NewMonthEvent e) {
+        OnNewMonth();
+    }
+
     protected abstract void OnSelect();
     protected abstract void OnDeselect();
+    protected virtual void OnNewMonth() {}
 }
