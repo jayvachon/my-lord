@@ -14,9 +14,9 @@ public class TenantList : PersonList
 		}
 	}
 
-	protected override void OnSelect() {
-    	foreach(Tenant tenant in SelectedBuilding.Tenants) {
-    		CreateTenantDetails(tenant);
-    	}
-    }
+	protected override List<Tenant> Tenants {
+		get {
+			return SelectedBuilding.Tenants;
+		}
+	}
 }

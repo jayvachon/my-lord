@@ -4,53 +4,65 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventSystem;
 
-public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable
+public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable, IEnableable
 {
     public GameObject dashboard;
-    public InputField rent; 
+    public RectTransform rent;
+    public InputField rentInput;
     public TenantList tenantList;
+
+    public RectTransform title;
+    public RectTransform tabs;
+    public RectTransform applicantList;
 
     void Start() {
     	Disable();
     }
 
-    void Enable() {
-    	dashboard.gameObject.SetActive(true);
+    public void Enable() {
+        rent.gameObject.SetActive(true);
+        tenantList.gameObject.SetActive(true);
+        title.gameObject.SetActive(true);
+        tabs.gameObject.SetActive(true);
+        applicantList.gameObject.SetActive(true);
     }
 
-    void Disable() {
-    	dashboard.gameObject.SetActive(false);
+    public void Disable() {
+    	rent.gameObject.SetActive(false);
+        tenantList.gameObject.SetActive(false);
+        title.gameObject.SetActive(false);
+        tabs.gameObject.SetActive(false);
+        applicantList.gameObject.SetActive(false);
     }
 
     public void Refresh() {
+
+        if (!SelectedBuilding) {
+            Disable();
+            return;
+        }
+
+        Enable();
+
         if (SelectedBuilding.State != Building.BuildingState.NotForSale 
             && SelectedBuilding.State != Building.BuildingState.ForSale) {
             
-            rent.gameObject.SetActive(true);
-            tenantList.gameObject.SetActive(true);
-            rent.text = SelectedBuilding.PerRoomRent.ToString();
+            rentInput.text = SelectedBuilding.PerRoomRent.ToString();
             tenantList.Refresh();
         } else {
+            tabs.gameObject.SetActive(false);
             rent.gameObject.SetActive(false);
             tenantList.gameObject.SetActive(false);
+            applicantList.gameObject.SetActive(false);
         }
     }
 
     public void AcceptRentUpdate() {
-        SelectedBuilding.UpdateRent(int.Parse(rent.text));
+        SelectedBuilding.UpdateRent(int.Parse(rentInput.text));
         Refresh();
     }
 
-    public void RejectRentUpdate() {
-        Refresh();
-    }
-
-    protected override void OnSelect() {
-        Refresh();
-    	Enable();
-    }
-
-    protected override void OnDeselect() {
-        Disable();
-    }
+    public void RejectRentUpdate() { Refresh(); }
+    protected override void OnSelect() { Refresh(); }
+    protected override void OnDeselect() { Refresh(); }
 }

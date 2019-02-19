@@ -36,7 +36,7 @@ public class Building : Clickable {
 	public bool HasTenants {
 		get { return tenants.Count > 0; }
 	}
-	public Stack<Tenant> Applicants {
+	public List<Tenant> Applicants {
 		get { return applicants; }
 	}
 
@@ -55,7 +55,7 @@ public class Building : Clickable {
 	}
 
 	List<Tenant> tenants = new List<Tenant>();
-	Stack<Tenant> applicants = new Stack<Tenant>();
+	List<Tenant> applicants = new List<Tenant>();
 	int repairsNeeded = 0;
 	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
@@ -81,9 +81,32 @@ public class Building : Clickable {
 		TenantManager.Destroy(tenant);
 	}
 
+	public void AcceptApplicant(Tenant applicant) {
+		applicant.UpdateState(Tenant.TenantState.Housed);
+		applicants.Remove(applicant);
+		tenants.Add(applicant);
+		if (tenants.Count == Tier.rooms) {
+			RejectAllApplicants();
+		}
+	}
+
+	public void RejectApplicant(Tenant applicant) {
+		applicant.UpdateState(Tenant.TenantState.Unhoused);
+		applicants.Remove(applicant);
+		TenantManager.Destroy(applicant);
+	}
+
+	void RejectAllApplicants() {
+		foreach(Tenant applicant in applicants) {
+			applicant.UpdateState(Tenant.TenantState.Unhoused);
+			TenantManager.Destroy(applicant);
+		}
+		applicants.Clear();
+	}
+
 	void FillTenants() {
 		for (int i = 0; i < Tier.rooms; i ++) {
-			tenants.Add(TenantManager.Create(PerRoomRent));
+			tenants.Add(TenantManager.Create(PerRoomRent, Tenant.TenantState.Housed));
 		}
 	}
 
@@ -288,9 +311,9 @@ public class Building : Clickable {
 	 			DisplayRepairs(Mathf.Min(1, repairsNeeded));
 	 			
 	 			if (tenants.Count < Tier.rooms) {
-	 				bool newApplicant = Random.Range(0, 12) == 0;
+	 				bool newApplicant = Random.Range(0, 3) == 0;
 	 				if (newApplicant) {
-	 					applicants.Push(TenantManager.Create(PerRoomRent));
+	 					applicants.Add(TenantManager.Create(PerRoomRent, Tenant.TenantState.Applicant));
 	 				}
 	 			}
 

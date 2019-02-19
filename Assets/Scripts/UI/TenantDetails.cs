@@ -12,6 +12,8 @@ public class TenantDetails : MB, IRefreshable
 	public Text repairText;
 	public Button evictButton;
 	public Text evictText;
+    public Button acceptButton;
+    public Button rejectButton;
 
     Building building;
 	Tenant tenant;
@@ -35,6 +37,16 @@ public class TenantDetails : MB, IRefreshable
         list.Refresh();
     }
 
+    public void Accept() {
+        building.AcceptApplicant(tenant);
+        list.Refresh();
+    }
+
+    public void Reject() {
+        building.RejectApplicant(tenant);
+        list.Refresh();
+    }
+
     public void Refresh() {
     	tenantName.text = tenant.Name;
     	rent.text = "$" + tenant.Rent;
@@ -42,6 +54,8 @@ public class TenantDetails : MB, IRefreshable
 
     	repairButton.gameObject.SetActive(false);
     	evictButton.gameObject.SetActive(false);
+        acceptButton.gameObject.SetActive(false);
+        rejectButton.gameObject.SetActive(false);
 
     	if (tenant.NeedRepair) {
     		repairButton.gameObject.SetActive(true);
@@ -51,6 +65,11 @@ public class TenantDetails : MB, IRefreshable
         if (tenant.Evictable) {
             evictButton.gameObject.SetActive(true);
             evictText.text = "Evict";
+        }
+
+        if (tenant.State == Tenant.TenantState.Applicant) {
+            acceptButton.gameObject.SetActive(true);
+            rejectButton.gameObject.SetActive(true);
         }
     }
 }

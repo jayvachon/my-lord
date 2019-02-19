@@ -12,9 +12,9 @@ public class ApplicantList : PersonList
 		}
 	}
 
-	protected override void OnSelect() {
-    	foreach(Tenant tenant in SelectedBuilding.Applicants) {
-    		CreateTenantDetails(tenant);
-    	}
-    }
+	protected override List<Tenant> Tenants {
+		get {
+			return SelectedBuilding.Applicants;
+		}
+	}
 }
