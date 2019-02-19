@@ -27,7 +27,7 @@ public class Cursor : SelectBuildingListener {
 	void GetMouseOver() {
 
 		// If the mouse is over the UI, don't raycast
-		if (Input.mousePosition.y <= 100) {
+		if (Input.mousePosition.y <= 220) {
 			return;
 		}
 		if (blockClick && Input.mousePosition.x >= 500) {

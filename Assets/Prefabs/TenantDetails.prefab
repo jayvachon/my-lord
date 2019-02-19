@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 6469261655118538216}
   - component: {fileID: 6469261655118538217}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RepairButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6469261655118538216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 907490325}
+        m_MethodName: Repair
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &6469261655187152648
@@ -686,6 +697,10 @@ MonoBehaviour:
   tenantName: {fileID: 6469261654864947619}
   rent: {fileID: 6469261654698983205}
   message: {fileID: 6469261656143682238}
+  repairButton: {fileID: 6469261655118538217}
+  repairText: {fileID: 6469261654611300615}
+  evictButton: {fileID: 6469261655700350766}
+  evictText: {fileID: 6469261655896370783}
 --- !u!1 &6469261655700350764
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +714,7 @@ GameObject:
   - component: {fileID: 6469261655700350761}
   - component: {fileID: 6469261655700350766}
   m_Layer: 5
-  m_Name: Button
+  m_Name: EvictButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -806,7 +821,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6469261655700350761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 907490325}
+        m_MethodName: Evict
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Refresh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &6469261655896370781

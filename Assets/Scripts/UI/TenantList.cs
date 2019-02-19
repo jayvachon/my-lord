@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using EventSystem;
 
 public class TenantList : SelectBuildingListener, IRefreshable
 {
+	public Text label;
 	public Transform content;
 	List<TenantDetails> details = new List<TenantDetails>();
 
 	public void Refresh() {
+		
+		label.text = string.Format("Tenants ({0}/{1}):",
+			SelectedBuilding.Tenants.Count,
+			SelectedBuilding.Tier.rooms);
+
 		foreach(TenantDetails d in details) {
 			d.Refresh();
 		}
@@ -19,7 +26,7 @@ public class TenantList : SelectBuildingListener, IRefreshable
 			.Instantiate("TenantDetails", Vector3.zero);
 		newDetailsTransform.SetParent(content);
 		TenantDetails newDetails = newDetailsTransform.GetComponent<TenantDetails>();
-		newDetails.Init(tenant);
+		newDetails.Init(SelectedBuilding, tenant, this);
 		details.Add(newDetails);
 	}
 

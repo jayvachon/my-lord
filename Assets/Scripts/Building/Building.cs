@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
@@ -43,8 +44,11 @@ public class Building : Clickable {
 		get { return repairsNeeded > 0; }
 	}
 
+	public int PerRoomRent {
+		get; private set;
+	}
 	public int TotalRent {
-		get { return tenants.Count * Tier.rent; }
+		get { return tenants.Sum(t => t.Rent); }
 	}
 
 	List<Tenant> tenants = new List<Tenant>();
@@ -53,27 +57,28 @@ public class Building : Clickable {
 	Material unselectedMaterial;
 
 	public void Init(ValueTier tier) {
-		
 		Tier = tier;
+		PerRoomRent = Tier.baseRent;
 		SetState(BuildingState.NotForSale);
 		UpdateDisplayValue();
 		FillTenants();
 		RemoveRepairs();
 	}
 
-	public void UpdateRent(int rent) {
-		Tier.rent = rent;
+	public void UpdateRent(int newRent) {
+		PerRoomRent = newRent;
 		foreach(Tenant t in tenants) {
-			t.Rent = Tier.rent;
+			t.UpdateRent(newRent);
 		}
+	}
+
+	public void EvictTenant(Tenant tenant) {
+		tenants.Remove(tenant);
 	}
 
 	void FillTenants() {
 		for (int i = 0; i < Tier.rooms; i ++) {
-			tenants.Add(new Tenant {
-				Name = "Rosa",
-				Rent = Tier.rent
-			});
+			tenants.Add(new Tenant(Tier.baseRent));
 		}
 	}
 
@@ -90,7 +95,17 @@ public class Building : Clickable {
 			SetState(BuildingState.Unlivable);
 		}
 
-		switch(repairsNeeded) {
+		DisplayRepairs(repairsNeeded);
+	}
+
+	void DisplayRepairs(int severity) {
+		switch(severity) {
+			case 0:
+				firstWarning.gameObject.SetActive(false);
+				secondWarning.gameObject.SetActive(false);
+				thirdWarning.gameObject.SetActive(false);
+				unlivableIndicator.gameObject.SetActive(false);
+				break;
 			case 1:
 				firstWarning.gameObject.SetActive(true);
 				secondWarning.gameObject.SetActive(false);
@@ -116,7 +131,6 @@ public class Building : Clickable {
 				unlivableIndicator.gameObject.SetActive(true);
 				break;
 		}
-		
 	}
 
 	void RemoveRepairs() {
@@ -258,7 +272,17 @@ public class Building : Clickable {
 	 			}
 	 			break;
 	 		case BuildingState.Owned:
-	 			bool needRepairs = Random.Range(0, 6) == 0;
+
+	 			bool needRepairs = Random.Range(0, 12) == 0;
+	 			if (needRepairs) {
+	 				int tenantIndex = Random.Range(0, tenants.Count);
+	 				tenants[tenantIndex].NeedRepair = true;
+	 			}
+
+	 			int repairsNeeded = tenants.Sum(t => t.NeedRepair ? 1 : 0);
+	 			DisplayRepairs(Mathf.Min(1, repairsNeeded));
+	 			
+	 			/*bool needRepairs = Random.Range(0, 6) == 0;
 	 			if (needRepairs) {
 	 				AddRepair();
 	 			}
@@ -276,7 +300,7 @@ public class Building : Clickable {
 	 						tenants.Add(new Tenant());
 	 					}
 	 				}
-	 			}
+	 			}*/
 	 			break;
 	 		default: break;
  		}

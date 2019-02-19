@@ -8,9 +8,13 @@ public static class ExtensionMethods
     	return value.ToString("##,#");
     }
 
-    public static float Map (this float x, float x1, float x2, float y1,  float y2) {
+    public static float Map(this float x, float x1, float x2, float y1,  float y2) {
 		var m = (y2 - y1) / (x2 - x1);
 		var c = y1 - m * x1;
 		return m * x + c;
+    }
+
+    public static T RandomItem<T>(this T[] array) {
+    	return array[Random.Range(0, array.Length)];
     }
 }

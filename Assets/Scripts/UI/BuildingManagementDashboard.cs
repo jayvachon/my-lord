@@ -23,10 +23,12 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable
     }
 
     public void Refresh() {
-        if (SelectedBuilding.State != Building.BuildingState.NotForSale && SelectedBuilding.State != Building.BuildingState.ForSale) {
+        if (SelectedBuilding.State != Building.BuildingState.NotForSale 
+            && SelectedBuilding.State != Building.BuildingState.ForSale) {
+            
             rent.gameObject.SetActive(true);
             tenantList.gameObject.SetActive(true);
-            rent.text = SelectedBuilding.Tier.rent.ToString();
+            rent.text = SelectedBuilding.PerRoomRent.ToString();
             tenantList.Refresh();
         } else {
             rent.gameObject.SetActive(false);

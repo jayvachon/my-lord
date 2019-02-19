@@ -132,7 +132,7 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 		tenants.text = string.Format("Tenants: {0}/{1} @ ${2}/room",
 			SelectedBuilding.Tenants.Count,
 			SelectedBuilding.Tier.rooms,
-			SelectedBuilding.Tier.rent);
+			SelectedBuilding.Tier.baseRent);
 	}
 
     protected override void AddListeners() {
