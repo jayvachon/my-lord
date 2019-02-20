@@ -19,6 +19,9 @@ public class Tenant
     // What they actually pay
     public int Rent { get; private set; }
 
+    // Minimum acceptable apartment quality
+    public int MinQuality { get; private set; }
+
     // If something in their apartment needs attention
     public bool NeedRepair { get; set; }
 
@@ -37,10 +40,11 @@ public class Tenant
     	"Lee", "McCarthy", "Jones", "Luxembourg", "Nesmith", "Archer", "Cardoso", "Russell", "Wright"
     };
 
-    public Tenant(int rent, TenantState state) {
+    public Tenant(int maxRent, int minQuality, TenantState state) {
     	Name = string.Format("{0} {1}", firstNames.RandomItem(), lastNames.RandomItem());
-    	Rent = rent;
-    	MaxRent = GetMaxRent();
+    	Rent = 0;
+    	MaxRent = maxRent;
+        MinQuality = minQuality;
     	NeedRepair = false;
     	Message = "";
     	Evictable = false;
@@ -62,10 +66,8 @@ public class Tenant
         State = newState;
     }
 
-    int GetMaxRent() {
-    	int[] maxRents = new int[] {
-			400, 600, 900, 1600, 2400
-		};
-		return maxRents.RandomItem();
+    public void Print() {
+        Debug.Log(string.Format("Name: {0}\nMaxRent: {1}\nMinQuality: {2}",
+            Name, MaxRent, MinQuality));
     }
 }

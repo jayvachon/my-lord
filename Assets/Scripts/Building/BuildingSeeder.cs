@@ -18,20 +18,54 @@ public class BuildingSeeder : MonoBehaviour {
 		for (int i = 0; i < 9; i ++) {
 			for (int j = 0; j < 4; j ++) {
 
-				float val = Mathf.PerlinNoise(i * perlinScale, j * perlinScale);
-				val = val.Map(0, 1, 0, Tiers.Max+1);
-				val = Mathf.Floor(val);
+				float val = Distribution.Random(0, 2000000)
+					.RoundToInterval(500000)
+					.Min(500000);
+				
+				/*if (val <= 500000) {
+					val = val.CeilToInterval(250000);
+				} else if (val <= 2500000) {
+					val = val.CeilToInterval(500000);
+				} else if (val <= 9000000) {
+					val = val.CeilToInterval(1000000);
+				} else {
+					val = val.CeilToInterval(10000000);
+				}*/
+				
+				int quality = 0;
+				if (val >= 1000000) { quality ++; }
+				if (val >= 2000000) { quality ++; }
+				if (val >= 3000000) { quality ++; }
+				if (val >= 5000000) { quality ++; }
+				if (val >= 7500000) { quality ++; }
+				if (val >= 10000000) { quality ++; }
+				if (val >= 15000000) { quality ++; }
+				if (val >= 20000000) { quality ++; }
+
+				int perRoomRent = 300;
+				if (quality == 1) { perRoomRent = 400; }
+				if (quality == 2) { perRoomRent = 600; }
+				if (quality == 3) { perRoomRent = 800; }
+				if (quality == 4) { perRoomRent = 1000; }
+				if (quality == 5) { perRoomRent = 1200; }
+				if (quality == 6) { perRoomRent = 1600; }
+				if (quality == 7) { perRoomRent = 2400; }
+				if (quality == 8) { perRoomRent = 3200; }
 
 				// Player starts the game owning one low-value building
 				bool isInheritedBuilding = (i == inheritedBuilding.x && j == inheritedBuilding.y);
-				ValueTier tier = isInheritedBuilding ? SeedValue(0) : SeedValue((int)val);
+				if (isInheritedBuilding) {
+					val = 500000;
+					quality = 0;
+					perRoomRent = 300;
+				}
 
 				Building building = GameObjectPool.Instantiate("Buildings", new Vector3(
 					-4 + i,
 					1,
 					-4 + j * 2.75f
 				)).GetComponent<Building>();
-				building.Init(tier);
+				building.Init((int)val, quality, perRoomRent);
 
 				if (isInheritedBuilding) {
 					StartCoroutine(InheritBuilding(building));
@@ -45,9 +79,7 @@ public class BuildingSeeder : MonoBehaviour {
 		// Wait until the end of the frame to ensure all listeners have been added
 		yield return new WaitForEndOfFrame();
 		Events.instance.Raise(new BuyBuildingEvent(building));
-	}
 
-	ValueTier SeedValue(int index=-1) {
-		return index == -1 ? Tiers.Tier[Random.Range(0, 5)] : Tiers.Tier[index];
+		TenantManager.PrintUnhoused();
 	}
 }

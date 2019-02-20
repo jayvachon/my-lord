@@ -47,12 +47,14 @@ public class Building : Clickable {
 		get { return repairsNeeded > 0; }
 	}
 
-	public int PerRoomRent {
-		get; private set;
-	}
 	public int TotalRent {
 		get { return tenants.Sum(t => t.Rent); }
 	}
+
+	public int Value { get; private set; }
+	public int Quality { get; private set; }
+	public int PerRoomRent { get; private set; }
+	public int Rooms { get; private set; }
 
 	List<Tenant> tenants = new List<Tenant>();
 	List<Tenant> applicants = new List<Tenant>();
@@ -60,9 +62,13 @@ public class Building : Clickable {
 	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
 
-	public void Init(ValueTier tier) {
-		Tier = tier;
-		PerRoomRent = Tier.baseRent;
+	public void Init(int value, int quality, int perRoomRent) {
+		Value = value;
+		Quality = quality;
+		PerRoomRent = perRoomRent;
+		Rooms = 9;
+		// Tier = tier;
+		// PerRoomRent = Tier.baseRent;
 		SetState(BuildingState.NotForSale);
 		UpdateDisplayValue();
 		FillTenants();
@@ -78,40 +84,41 @@ public class Building : Clickable {
 
 	public void EvictTenant(Tenant tenant) {
 		tenants.Remove(tenant);
-		TenantManager.Destroy(tenant);
+		TenantManager.UnhouseTenant(tenant);
 	}
 
 	public void AcceptApplicant(Tenant applicant) {
-		applicant.UpdateState(Tenant.TenantState.Housed);
+		TenantManager.AcceptApplicant(applicant);
 		applicants.Remove(applicant);
 		tenants.Add(applicant);
-		if (tenants.Count == Tier.rooms) {
+		if (tenants.Count == Rooms) {
 			RejectAllApplicants();
 		}
 	}
 
 	public void RejectApplicant(Tenant applicant) {
-		applicant.UpdateState(Tenant.TenantState.Unhoused);
 		applicants.Remove(applicant);
-		TenantManager.Destroy(applicant);
+		TenantManager.RejectApplicant(applicant);
 	}
 
 	void RejectAllApplicants() {
 		foreach(Tenant applicant in applicants) {
-			applicant.UpdateState(Tenant.TenantState.Unhoused);
-			TenantManager.Destroy(applicant);
+			TenantManager.RejectApplicant(applicant);
 		}
 		applicants.Clear();
 	}
 
 	void FillTenants() {
-		for (int i = 0; i < Tier.rooms; i ++) {
-			tenants.Add(TenantManager.Create(PerRoomRent, Tenant.TenantState.Housed));
+		for (int i = 0; i < Rooms; i ++) {
+			Tenant newTenant;
+			if (TenantManager.TryHouseTenant(PerRoomRent, Quality, out newTenant)) {
+				tenants.Add(newTenant);
+			}
 		}
 	}
 
 	void UpdateDisplayValue() {
-		information.text = (Tier.value*1.0f/1000000*1.0f).ToString();
+		information.text = (Value / 1000000f).ToString();
 	}
 
 	void AddRepair() {
@@ -301,8 +308,8 @@ public class Building : Clickable {
 	 			break;
 	 		case BuildingState.Owned:
 
-	 			bool needRepairs = Random.Range(0, 12) == 0;
-	 			if (needRepairs) {
+	 			bool needRepairs = Random.Range(0, 24) == 0;
+	 			if (needRepairs && tenants.Count > 0) {
 	 				int tenantIndex = Random.Range(0, tenants.Count);
 	 				tenants[tenantIndex].NeedRepair = true;
 	 			}
@@ -310,11 +317,11 @@ public class Building : Clickable {
 	 			int repairsNeeded = tenants.Sum(t => t.NeedRepair ? 1 : 0);
 	 			DisplayRepairs(Mathf.Min(1, repairsNeeded));
 	 			
-	 			if (tenants.Count < Tier.rooms) {
-	 				bool newApplicant = Random.Range(0, 3) == 0;
-	 				if (newApplicant) {
-	 					applicants.Add(TenantManager.Create(PerRoomRent, Tenant.TenantState.Applicant));
-	 				}
+	 			if (tenants.Count < Rooms) {
+ 					Tenant newTenant;
+ 					if (TenantManager.TryGetApplicant(PerRoomRent, Quality, out newTenant)) {
+ 						applicants.Add(newTenant);
+ 					}
 	 			}
 
 	 			if (TotalRent > 0) {
@@ -323,26 +330,6 @@ public class Building : Clickable {
 	 				c.SetParent(transform);
 	 				c.position = Vector3.zero;*/
 	 			}
-
-	 			/*bool needRepairs = Random.Range(0, 6) == 0;
-	 			if (needRepairs) {
-	 				AddRepair();
-	 			}
-	 			if (repairsNeeded > 0) {
-	 				if (tenants.Count > 0) {
-	 					bool tenantMoveOut = Random.Range(0, 6) == 0;
-	 					if (tenantMoveOut) {
-	 						tenants.RemoveAt(0);
-	 					}
-	 				}
-	 			} else {
-	 				if (tenants.Count < Tier.rooms) {
-	 					bool tenantMoveIn = Random.Range(0, 6) == 0;
-	 					if (tenantMoveIn) {
-	 						tenants.Add(new Tenant());
-	 					}
-	 				}
-	 			}*/
 	 			break;
 	 		default: break;
  		}

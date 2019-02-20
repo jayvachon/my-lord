@@ -10,7 +10,7 @@ public class TenantList : PersonList
 		get {
 			return string.Format("Tenants ({0}/{1})",
 				SelectedBuilding.Tenants.Count,
-				SelectedBuilding.Tier.rooms);
+				SelectedBuilding.Rooms);
 		}
 	}
 

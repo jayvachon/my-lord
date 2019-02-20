@@ -31,7 +31,7 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
     }
 
     public void BuyBuilding() {
-    	if (player.Wealth >= SelectedBuilding.Tier.value) {
+    	if (player.Wealth >= SelectedBuilding.Value) {
     		Events.instance.Raise(new BuyBuildingEvent(SelectedBuilding));
     		UpdateButtonStates();
     	}
@@ -83,7 +83,7 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 		switch(SelectedBuilding.State) {
 			case Building.BuildingState.ForSale:
 	    		buyButton.gameObject.SetActive(true);
-		    	buyButton.interactable = player.Wealth >= SelectedBuilding.Tier.value;
+		    	buyButton.interactable = player.Wealth >= SelectedBuilding.Value;
 		    	break;
 		    case Building.BuildingState.Owned:
 
@@ -95,7 +95,7 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 			    // Sell (cannot sell without fixing your shit)
 			    else {
 				    sellButton.gameObject.SetActive(true);
-				    sellText.text = "Sell $" + SelectedBuilding.Tier.value.ToDisplay();
+				    sellText.text = "Sell $" + SelectedBuilding.Value.ToDisplay();
 			    }
 		    	break;
 		    case Building.BuildingState.Unlivable:
@@ -128,11 +128,11 @@ public class BuildingDashboard : SelectBuildingListener, IRefreshable
 	}
 
 	void UpdateDisplayText() {
-		value.text = "Building Value: $" + SelectedBuilding.Tier.value.ToDisplay();
+		value.text = "Building Value: $" + SelectedBuilding.Value.ToDisplay();
 		tenants.text = string.Format("Tenants: {0}/{1} @ ${2}/room",
 			SelectedBuilding.Tenants.Count,
-			SelectedBuilding.Tier.rooms,
-			SelectedBuilding.Tier.baseRent);
+			SelectedBuilding.Rooms,
+			SelectedBuilding.PerRoomRent);
 	}
 
 	protected override void OnSelect() {

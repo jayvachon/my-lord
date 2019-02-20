@@ -26,7 +26,7 @@ public class Player : MB
     }
 
     void OnBuyBuildingEvent(BuyBuildingEvent e) {
-    	wealth -= e.Building.Tier.value;
+    	wealth -= e.Building.Value;
     	buildings.Add(e.Building);
     }
 
@@ -41,7 +41,7 @@ public class Player : MB
 	}
 
     void OnSellBuildingEvent(SellBuildingEvent e) {
-        wealth += e.Building.Tier.value;
+        wealth += e.Building.Value;
     }
 
     void OnRepairBuildingEvent(RepairBuildingEvent e) {
