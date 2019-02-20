@@ -79,7 +79,5 @@ public class BuildingSeeder : MonoBehaviour {
 		// Wait until the end of the frame to ensure all listeners have been added
 		yield return new WaitForEndOfFrame();
 		Events.instance.Raise(new BuyBuildingEvent(building));
-
-		TenantManager.PrintUnhoused();
 	}
 }

@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public class Building : Clickable {
+public enum BuildingState {
+	NotForSale,
+	ForSale,
+	Owned,
+	Renovating,
+	Unlivable
+}
 
-	public enum BuildingState {
-		NotForSale,
-		ForSale,
-		Owned,
-		Renovating,
-		Unlivable
-	}
+public class Building : Clickable {
 
 	public Material notForSaleMaterial;
 	public Material forSaleMaterial;
@@ -51,10 +51,15 @@ public class Building : Clickable {
 		get { return tenants.Sum(t => t.Rent); }
 	}
 
+	public bool CanRenovate {
+		get { return tenants.Count == 0; }
+	}
+
 	public int Value { get; private set; }
 	public int Quality { get; private set; }
 	public int PerRoomRent { get; private set; }
 	public int Rooms { get; private set; }
+	public int RenovationCost { get; private set; }
 
 	List<Tenant> tenants = new List<Tenant>();
 	List<Tenant> applicants = new List<Tenant>();
@@ -67,6 +72,7 @@ public class Building : Clickable {
 		Quality = quality;
 		PerRoomRent = perRoomRent;
 		Rooms = 4;
+		RenovationCost = 100000;
 		// Tier = tier;
 		// PerRoomRent = Tier.baseRent;
 		SetState(BuildingState.NotForSale);

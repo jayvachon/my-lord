@@ -36,7 +36,7 @@ public class Player : MB
 
     void OnNewMonthEvent(NewMonthEvent e) {
 		foreach(Building b in buildings) {
-			wealth += b.State == Building.BuildingState.Owned ? b.TotalRent : 0;
+			wealth += b.State == BuildingState.Owned ? b.TotalRent : 0;
 		}
 	}
 
