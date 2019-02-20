@@ -40,19 +40,15 @@ public class Building : Clickable {
 		get { return applicants; }
 	}
 
-	public int RepairCost {
-		get { return repairsNeeded * 500; }
-	}
-	public bool NeedsRepairs {
-		get { return repairsNeeded > 0; }
-	}
-
 	public int TotalRent {
 		get { return tenants.Sum(t => t.Rent); }
 	}
 
 	public bool CanRenovate {
-		get { return tenants.Count == 0; }
+		get { 
+			return State == BuildingState.Owned
+				&& tenants.Count == 0; 
+		}
 	}
 
 	public int Value { get; private set; }
@@ -63,7 +59,6 @@ public class Building : Clickable {
 
 	List<Tenant> tenants = new List<Tenant>();
 	List<Tenant> applicants = new List<Tenant>();
-	int repairsNeeded = 0;
 	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
 
@@ -78,7 +73,7 @@ public class Building : Clickable {
 		SetState(BuildingState.NotForSale);
 		UpdateDisplayValue();
 		FillTenants();
-		RemoveRepairs();
+		DisplayRepairs(0);
 	}
 
 	public void UpdateRent(int newRent) {
@@ -127,18 +122,6 @@ public class Building : Clickable {
 		information.text = (Value / 1000000f).ToString();
 	}
 
-	void AddRepair() {
-		if (repairsNeeded < 3) {
-			repairsNeeded ++;
-		} else {
-			repairsNeeded ++;
-			RemoveTenants();
-			SetState(BuildingState.Unlivable);
-		}
-
-		DisplayRepairs(repairsNeeded);
-	}
-
 	void DisplayRepairs(int severity) {
 		switch(severity) {
 			case 0:
@@ -172,14 +155,6 @@ public class Building : Clickable {
 				unlivableIndicator.gameObject.SetActive(true);
 				break;
 		}
-	}
-
-	void RemoveRepairs() {
-		repairsNeeded = 0;
-		firstWarning.gameObject.SetActive(false);
-		secondWarning.gameObject.SetActive(false);
-		thirdWarning.gameObject.SetActive(false);
-		unlivableIndicator.gameObject.SetActive(false);
 	}
 
 	void RemoveTenants() {
@@ -265,7 +240,6 @@ public class Building : Clickable {
  	void OnRenovateBuildingEvent(RenovateBuildingEvent e) {
  		if (e.Building == this) {
  			SetState(BuildingState.Renovating);
- 			RemoveRepairs();
  		}
  	}
 
@@ -277,7 +251,7 @@ public class Building : Clickable {
 
  	void OnRepairBuildingEvent(RepairBuildingEvent e) {
  		if (e.Building == this) {
- 			RemoveRepairs();
+ 			
  		}
  	}
 

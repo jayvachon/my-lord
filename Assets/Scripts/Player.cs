@@ -31,7 +31,7 @@ public class Player : MB
     }
 
     void OnRenovateBuildingEvent(RenovateBuildingEvent e) {
-        wealth -= e.Building.Tier.renovate;
+        wealth -= e.Building.RenovationCost;
     }
 
     void OnNewMonthEvent(NewMonthEvent e) {
@@ -45,6 +45,6 @@ public class Player : MB
     }
 
     void OnRepairBuildingEvent(RepairBuildingEvent e) {
-        wealth -= e.Building.RepairCost;
+        
     }
 }

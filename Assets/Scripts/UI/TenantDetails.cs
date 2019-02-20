@@ -5,24 +5,26 @@ using UnityEngine.UI;
 
 public class TenantDetails : MB, IRefreshable
 {
-	public Text tenantName;
-	public Text rent;
-	public Text message;
-	public Button repairButton;
-	public Text repairText;
-	public Button evictButton;
-	public Text evictText;
+    public Text tenantName;
+    public Text rent;
+    public Text message;
+    public Button repairButton;
+    public Text repairText;
+    public Button evictButton;
+    public Text evictText;
     public Button acceptButton;
     public Button rejectButton;
 
+    IRefreshable buildingManagementDashboard;
     Building building;
 	Tenant tenant;
-    PersonList list;
 
-    public void Init(Building _building, Tenant _tenant, PersonList _list) {
+    public void Init(IRefreshable _buildingManagementDashboard,
+        Building _building, Tenant _tenant) {
+
+        buildingManagementDashboard = _buildingManagementDashboard;
         building = _building;
     	tenant = _tenant;
-        list = _list;
     	Refresh();
     }
 
@@ -34,17 +36,17 @@ public class TenantDetails : MB, IRefreshable
     public void Evict() {
         building.EvictTenant(tenant);
         gameObject.SetActive(false);
-        list.Refresh();
+        buildingManagementDashboard.Refresh();
     }
 
     public void Accept() {
         building.AcceptApplicant(tenant);
-        list.Refresh();
+        buildingManagementDashboard.Refresh();
     }
 
     public void Reject() {
         building.RejectApplicant(tenant);
-        list.Refresh();
+        buildingManagementDashboard.Refresh();
     }
 
     public void Refresh() {

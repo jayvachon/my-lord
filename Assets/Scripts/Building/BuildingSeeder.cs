@@ -8,8 +8,6 @@ public class BuildingSeeder : MonoBehaviour {
 
 	void Start() {
 
-		const float perlinScale = 0.75f;
-
 		Vector2 inheritedBuilding = new Vector2(
 			Random.Range(0, 9),
 			Random.Range(0, 4)

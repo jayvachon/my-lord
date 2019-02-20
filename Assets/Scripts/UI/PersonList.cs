@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class PersonList : SelectBuildingListener, IRefreshable
 {
+	public BuildingManagementDashboard buildingManagementDashboard;
     public Text tab;
 	public Transform content;
 	List<TenantDetails> details = new List<TenantDetails>();
@@ -14,7 +15,7 @@ public abstract class PersonList : SelectBuildingListener, IRefreshable
 	protected abstract string TabText { get; }
 
 	public void Refresh() {
-		
+
 		tab.text = TabText;
 
 		foreach(TenantDetails d in details) {
@@ -33,21 +34,10 @@ public abstract class PersonList : SelectBuildingListener, IRefreshable
 		newDetailsTransform.SetParent(content);
 		newDetailsTransform.SetAsLastSibling();
 		TenantDetails newDetails = newDetailsTransform.GetComponent<TenantDetails>();
-		newDetails.Init(SelectedBuilding, tenant, this);
+		newDetails.Init(buildingManagementDashboard, SelectedBuilding, tenant);
 		details.Add(newDetails);
 		return newDetails;
 	}
-
-    protected override void OnDeselect() {
-    	foreach(TenantDetails d in details) {
-    		GameObjectPool.Destroy("TenantDetails", d.transform);
-    	}
-    	details.Clear();
-    }
-
-    protected override void OnSelect() {
-    	Refresh();
-    }
 
     protected override void OnNewMonth() {
     	if (SelectedBuilding != null)

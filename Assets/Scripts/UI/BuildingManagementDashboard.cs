@@ -22,7 +22,7 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
 
     public RectTransform title;
     public RectTransform tabs;
-    public RectTransform applicantList;
+    public ApplicantList applicantList;
 
     void Start() {
     	Disable();
@@ -58,29 +58,36 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
 
         label.text = string.Format("Manage Building | {0}", SelectedBuilding.Value.ToDisplay());
 
-        if (SelectedBuilding.State != BuildingState.NotForSale 
-            && SelectedBuilding.State != BuildingState.ForSale) {
+        if (SelectedBuilding.State == BuildingState.Owned
+            || SelectedBuilding.State == BuildingState.Renovating) {
             
             sellButton.gameObject.SetActive(true);
             renovateButton.gameObject.SetActive(true);
             renovateText.text = string.Format("Renovate ${0}",
                 SelectedBuilding.RenovationCost.ToDisplay());
-            renovateButton.GetComponent<Button>().interactable = SelectedBuilding.CanRenovate;
+            renovateButton.GetComponent<Button>()
+                .interactable = SelectedBuilding.CanRenovate;
 
             rentInput.text = SelectedBuilding.PerRoomRent.ToString();
             tenantList.Refresh();
-        } else {
+            applicantList.Refresh();
+        }
+
+        if (SelectedBuilding.State == BuildingState.NotForSale
+            || SelectedBuilding.State == BuildingState.ForSale) {
+
             sellButton.gameObject.SetActive(false);
             renovateButton.gameObject.SetActive(false);
             tabs.gameObject.SetActive(false);
             rent.gameObject.SetActive(false);
             tenantList.gameObject.SetActive(false);
             applicantList.gameObject.SetActive(false);
+        }
 
-            if (SelectedBuilding.State == BuildingState.ForSale) {
-                buyButton.gameObject.SetActive(true);
-                buyButton.GetComponent<Button>().interactable = player.Wealth >= SelectedBuilding.Value;
-            }
+        if (SelectedBuilding.State == BuildingState.ForSale) {
+            buyButton.gameObject.SetActive(true);
+            buyButton.GetComponent<Button>()
+                .interactable = player.Wealth >= SelectedBuilding.Value;
         }
     }
 
@@ -92,7 +99,7 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
     }
 
     public void RenovateBuilding() {
-        if (player.Wealth >= SelectedBuilding.Tier.renovate) {
+        if (player.Wealth >= SelectedBuilding.RenovationCost) {
             Events.instance.Raise(new RenovateBuildingEvent(SelectedBuilding));
             Refresh();
         }

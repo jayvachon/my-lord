@@ -27,7 +27,7 @@ public abstract class SelectBuildingListener : MB
         OnNewMonth();
     }
 
-    protected abstract void OnSelect();
-    protected abstract void OnDeselect();
+    protected virtual void OnSelect() {}
+    protected virtual void OnDeselect() {}
     protected virtual void OnNewMonth() {}
 }
