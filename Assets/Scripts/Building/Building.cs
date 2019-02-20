@@ -66,7 +66,7 @@ public class Building : Clickable {
 		Value = value;
 		Quality = quality;
 		PerRoomRent = perRoomRent;
-		Rooms = 9;
+		Rooms = 4;
 		// Tier = tier;
 		// PerRoomRent = Tier.baseRent;
 		SetState(BuildingState.NotForSale);

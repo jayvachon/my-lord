@@ -57,6 +57,18 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
         }
     }
 
+    public void AdjustUp() {
+        rentInput.text = (int.Parse(rentInput.text) + 100).ToString();
+        SelectedBuilding.UpdateRent(int.Parse(rentInput.text));
+        Refresh();
+    }
+
+    public void AdjustDown() {
+        rentInput.text = (int.Parse(rentInput.text) - 100).ToString();
+        SelectedBuilding.UpdateRent(int.Parse(rentInput.text));
+        Refresh();
+    }
+
     public void AcceptRentUpdate() {
         SelectedBuilding.UpdateRent(int.Parse(rentInput.text));
         Refresh();
