@@ -7,26 +7,28 @@ using EventSystem;
 public class UnitDisplay : MB
 {
     public Unit unit;
-    public Text rent;
+    public Text rentAmount;
     public GameObject repairGroup;
-    public GameObject newYearGroup;
+    public GameObject rentEditGroup;
     public InputField rentInput;
 
     void Awake() {
     	repairGroup.SetActive(false);
-    	newYearGroup.SetActive(false);
+    	rentEditGroup.SetActive(false);
     }
 
-    void Update() {
-    	rent.text = string.Format("Rent: ${0}", unit.Rent);
+    void Start() {
+    	rentAmount.text = string.Format("${0}", unit.Rent.ToDisplay());
     }
 
     public void Ignore() {
+    	unit.IgnoreRepair();
     	Events.instance.Raise(new IgnoreRepairUnitEvent(unit));
     	repairGroup.SetActive(false);
     }
 
     public void Repair() {
+    	unit.Repair();
     	Events.instance.Raise(new RepairUnitEvent(unit));
     	repairGroup.SetActive(false);
     }
@@ -54,10 +56,13 @@ public class UnitDisplay : MB
     }
 
     void OnEndYearEvent(EndYearEvent e) {
-    	newYearGroup.SetActive(true);
+    	rentEditGroup.SetActive(true);
+    	rentAmount.gameObject.SetActive(false);
     }
 
     void OnBeginYearEvent(BeginYearEvent e) {
-    	newYearGroup.SetActive(false);
+    	rentEditGroup.SetActive(false);
+    	rentAmount.gameObject.SetActive(true);
+    	rentAmount.text = string.Format("${0}", unit.Rent.ToDisplay());
     }
 }
