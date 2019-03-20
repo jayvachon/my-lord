@@ -14,7 +14,7 @@ public class MB : MonoBehaviour
 		}
 	}
 
-	void Awake() {
+	void OnEnable() {
 		AddListeners();
 	}
 	

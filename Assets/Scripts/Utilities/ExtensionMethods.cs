@@ -6,11 +6,11 @@ using UnityEngine;
 public static class ExtensionMethods
 {
     public static string ToDisplay(this int value) {
-    	return value.ToString("##,#");
+    	return value == 0 ? "0" : value.ToString("##,#");
     }
 
     public static string ToDisplay(this float value) {
-        return value.ToString("##,#");
+        return Mathf.Approximately(value, 0) ? "0" : value.ToString("##,#");
     }
 
     public static float Map(this float x, float x1, float x2, float y1,  float y2) {

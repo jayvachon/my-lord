@@ -12,10 +12,28 @@ public class Player : MB
     }
 
     public int MonthlyRevenue {
-    	get { return buildings.Sum(b => b.TotalRent); }
+    	get { 
+            int revenue = buildings.Sum(b => b.TotalRent);
+            int expenses = 0;
+            Loan loan = LoanManager.GetLoan();
+            if (loan != null && !loan.Completed) {
+                expenses = loan.MonthlyPayment;
+            }
+            return revenue - expenses;
+        }
     }
 
     List<Building> buildings = new List<Building>();
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Loan loan = LoanManager.NewLoan();
+            wealth += loan.Amount;
+        }
+        if (Input.GetKeyDown(KeyCode.K)) {
+            LoanManager.GetLoan().Print();
+        }
+    }
 
     protected override void AddListeners() {
     	Events.instance.AddListener<BuyBuildingEvent>(OnBuyBuildingEvent);
@@ -38,6 +56,10 @@ public class Player : MB
 		foreach(Building b in buildings) {
 			wealth += b.State == BuildingState.Owned ? b.TotalRent : 0;
 		}
+        Loan loan = LoanManager.GetLoan();
+        if (loan != null && !loan.Completed) {
+            wealth -= loan.MonthlyPayment;
+        }
 	}
 
     void OnSellBuildingEvent(SellBuildingEvent e) {

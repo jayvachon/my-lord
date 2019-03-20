@@ -8,6 +8,9 @@ public class Cursor : SelectBuildingListener {
 	bool mouseDown = false;
 	bool blockClick = false;
 
+	Transform hover;
+	bool hovering = false;
+
 	void LateUpdate() {
 		if (Input.GetMouseButton(0)) {
 			if (!mouseDown) {
@@ -18,27 +21,36 @@ public class Cursor : SelectBuildingListener {
 		if (!Input.GetMouseButton(0)) {
 			mouseDown = false;
 		}
+		RaycastHit hit;
+		if (GetMouseOver(out hit)) {
+			hover = hit.transform;
+			hovering = true;
+		} else {
+			hovering = false;
+		}
+		Debug.Log (hovering);
 	}
 
 	void MouseDown() {
-		GetMouseOver();
+		RaycastHit hit;
+		if (GetMouseOver(out hit)) {
+			Events.instance.Raise(new ClickEvent(hit.transform));
+		}
 	}
 
-	void GetMouseOver() {
+	bool GetMouseOver(out RaycastHit hit) {
+		
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		bool didHit = Physics.Raycast(ray, out hit, Mathf.Infinity);
 
 		// If the mouse is over the UI, don't raycast
 		if (Input.mousePosition.y <= 220) {
-			return;
+			return false;
 		}
 		if (blockClick && Input.mousePosition.x >= 500) {
-			return;
+			return false;
 		}
-		
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-			Events.instance.Raise(new ClickEvent(hit.transform));
-		}
+		return didHit;
 	}
 
 	protected override void OnSelect() {

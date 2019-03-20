@@ -47,29 +47,32 @@ public class Building : Clickable {
 	public bool CanRenovate {
 		get { 
 			return State == BuildingState.Owned
-				&& tenants.Count == 0; 
+				&& !HasRenovated
+				&& tenants.Count == 0;
 		}
 	}
 
 	public int Value { get; private set; }
-	public int Quality { get; private set; }
+	public int Quality {
+		get { return Mathf.FloorToInt(Value / 1000000); }
+	}
 	public int PerRoomRent { get; private set; }
 	public int Rooms { get; private set; }
-	public int RenovationCost { get; private set; }
+	public bool HasRenovated { get; private set; }
+	public int RenovationCost {
+		get { return Value / 5; }
+	}
 
 	List<Tenant> tenants = new List<Tenant>();
 	List<Tenant> applicants = new List<Tenant>();
 	int renovationTimer = 6; // Time in months
 	Material unselectedMaterial;
 
-	public void Init(int value, int quality, int perRoomRent) {
+	public void Init(int value, int perRoomRent) {
 		Value = value;
-		Quality = quality;
 		PerRoomRent = perRoomRent;
 		Rooms = 4;
-		RenovationCost = 100000;
-		// Tier = tier;
-		// PerRoomRent = Tier.baseRent;
+		HasRenovated = false;
 		SetState(BuildingState.NotForSale);
 		UpdateDisplayValue();
 		FillTenants();
@@ -107,6 +110,23 @@ public class Building : Clickable {
 			TenantManager.RejectApplicant(applicant);
 		}
 		applicants.Clear();
+	}
+
+	public void Upgrade(int level) {
+		switch(level) {
+			// Neighbors upgrade
+			case 0: Value += (int)(Value * 0.5f); break;
+
+			// Renovate
+			case 1:
+				Value += Value;
+				HasRenovated = true;
+				break;
+
+			// Rebuild
+			case 2: Value += Value * 2; break;
+		}
+		UpdateDisplayValue();
 	}
 
 	void FillTenants() {
@@ -261,7 +281,7 @@ public class Building : Clickable {
 
  		switch(State) {
 	 		case BuildingState.NotForSale:
-	 			change = Random.Range(0, 72) == 0;
+	 			change = Random.Range(0, 60) == 0;
 	 			if (change) {
 	 				if (Selected) Deselect();
 	 				SetState(BuildingState.ForSale);
@@ -279,9 +299,8 @@ public class Building : Clickable {
 	 				renovationTimer --;
 	 			} else {
 	 				renovationTimer = 6;
-	 				Tier = Tiers.Tier[Tier.level + 1];
+	 				Upgrade(1);
 	 				UpdateDisplayValue();
-	 				FillTenants();
 	 				SetState(BuildingState.Owned);
 	 				Events.instance.Raise(new UpgradeBuildingEvent(this));
 	 			}

@@ -4,7 +4,9 @@ using UnityEngine;
 using EventSystem;
 
 [RequireComponent(typeof(GameObjectPool))]
-public class BuildingSeeder : MonoBehaviour {
+public class BuildingSeeder : MB {
+
+	Building[,] buildings = new Building[9,4];
 
 	void Start() {
 
@@ -13,8 +15,8 @@ public class BuildingSeeder : MonoBehaviour {
 			Random.Range(0, 4)
 		);
 
-		for (int i = 0; i < 9; i ++) {
-			for (int j = 0; j < 4; j ++) {
+		for (int i = 0; i < buildings.GetLength(0); i ++) {
+			for (int j = 0; j < buildings.GetLength(1); j ++) {
 
 				float val = Distribution.Random(0, 2000000)
 					.RoundToInterval(500000)
@@ -63,7 +65,9 @@ public class BuildingSeeder : MonoBehaviour {
 					1,
 					-4 + j * 2.75f
 				)).GetComponent<Building>();
-				building.Init((int)val, quality, perRoomRent);
+				building.Init((int)val, perRoomRent);
+
+				buildings[i,j] = building;
 
 				if (isInheritedBuilding) {
 					StartCoroutine(InheritBuilding(building));
@@ -77,5 +81,32 @@ public class BuildingSeeder : MonoBehaviour {
 		// Wait until the end of the frame to ensure all listeners have been added
 		yield return new WaitForEndOfFrame();
 		Events.instance.Raise(new BuyBuildingEvent(building));
+	}
+
+	protected override void AddListeners() {
+		Events.instance.AddListener<UpgradeBuildingEvent>(OnUpgradeBuilding);
+	}
+
+	void OnUpgradeBuilding(UpgradeBuildingEvent e) {
+		for (int i = 0; i < buildings.GetLength(0); i ++) {
+			for (int j = 0; j < buildings.GetLength(1); j ++) {
+				Building b = buildings[i,j];
+				if (b == e.Building) {
+					if (i > 0) {
+						buildings[i-1,j].Upgrade(0);
+					}
+					if (i < buildings.GetLength(0) - 1) {
+						buildings[i+1,j].Upgrade(0);
+					}
+					if (j > 0) {
+						buildings[i,j-1].Upgrade(0);
+					}
+					if (j < buildings.GetLength(1) - 1) {
+						buildings[i,j+1].Upgrade(0);
+					}
+					return;
+				}
+			}
+		}
 	}
 }

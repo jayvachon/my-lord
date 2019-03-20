@@ -15,11 +15,11 @@ public class TenantDetails : MB, IRefreshable
     public Button acceptButton;
     public Button rejectButton;
 
-    IRefreshable buildingManagementDashboard;
+    BuildingManagementDashboard buildingManagementDashboard;
     Building building;
 	Tenant tenant;
 
-    public void Init(IRefreshable _buildingManagementDashboard,
+    public void Init(BuildingManagementDashboard _buildingManagementDashboard,
         Building _building, Tenant _tenant) {
 
         buildingManagementDashboard = _buildingManagementDashboard;
@@ -41,12 +41,12 @@ public class TenantDetails : MB, IRefreshable
 
     public void Accept() {
         building.AcceptApplicant(tenant);
-        buildingManagementDashboard.Refresh();
+        buildingManagementDashboard.Refresh(true);
     }
 
     public void Reject() {
         building.RejectApplicant(tenant);
-        buildingManagementDashboard.Refresh();
+        buildingManagementDashboard.Refresh(true);
     }
 
     public void Refresh() {
@@ -64,7 +64,8 @@ public class TenantDetails : MB, IRefreshable
     		repairText.text = "Fix $500";
     	}
 
-        if (tenant.Evictable) {
+        if (tenant.State == Tenant.TenantState.Housed
+            && Game.State == GameState.YearStart) {
             evictButton.gameObject.SetActive(true);
             evictText.text = "Evict";
         }

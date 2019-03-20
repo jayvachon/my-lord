@@ -9,6 +9,7 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
     public Player player;
 
     public GameObject dashboard;
+    public GameObject buttonBlocker;
     public Text label;
 
     public GameObject buyButton;
@@ -25,6 +26,7 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
     public ApplicantList applicantList;
 
     void Start() {
+        buttonBlocker.gameObject.SetActive(false);
     	Disable();
     }
 
@@ -48,6 +50,10 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
     }
 
     public void Refresh() {
+        Refresh(false);
+    }
+
+    public void Refresh(bool showApplicantList=false) {
 
         if (!SelectedBuilding) {
             Disable();
@@ -61,16 +67,41 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
         if (SelectedBuilding.State == BuildingState.Owned
             || SelectedBuilding.State == BuildingState.Renovating) {
             
+            buyButton.gameObject.SetActive(false);
             sellButton.gameObject.SetActive(true);
-            renovateButton.gameObject.SetActive(true);
-            renovateText.text = string.Format("Renovate ${0}",
-                SelectedBuilding.RenovationCost.ToDisplay());
-            renovateButton.GetComponent<Button>()
-                .interactable = SelectedBuilding.CanRenovate;
+
+            if (SelectedBuilding.HasRenovated) {
+                renovateButton.gameObject.SetActive(false);
+            } else {
+                renovateButton.gameObject.SetActive(true);
+                renovateText.text = string.Format("Renovate ${0}",
+                    SelectedBuilding.RenovationCost.ToDisplay());
+                renovateButton.GetComponent<Button>()
+                    .interactable = SelectedBuilding.CanRenovate;
+            }
 
             rentInput.text = SelectedBuilding.PerRoomRent.ToString();
             tenantList.Refresh();
             applicantList.Refresh();
+
+            if (showApplicantList) {
+                tenantList.gameObject.SetActive(false);
+                applicantList.gameObject.SetActive(true);
+            } else {
+                tenantList.gameObject.SetActive(true);
+                applicantList.gameObject.SetActive(false);
+            }
+        }
+
+        if (SelectedBuilding.State == BuildingState.Renovating) {
+            sellButton.gameObject.SetActive(false);
+            renovateButton.gameObject.SetActive(true);
+            renovateText.text = "Renovating";
+            renovateButton.GetComponent<Button>().interactable = false;
+            rent.gameObject.SetActive(false);
+            tabs.gameObject.SetActive(false);
+            tenantList.gameObject.SetActive(false);
+            applicantList.gameObject.SetActive(false);
         }
 
         if (SelectedBuilding.State == BuildingState.NotForSale
@@ -130,4 +161,25 @@ public class BuildingManagementDashboard : SelectBuildingListener, IRefreshable,
     public void RejectRentUpdate() { Refresh(); }
     protected override void OnSelect() { Refresh(); }
     protected override void OnDeselect() { Refresh(); }
+
+    protected override void AddListeners() {
+        base.AddListeners();
+        Events.instance.AddListener<RenovateBuildingEvent>(OnRenovateBuildingEvent);
+        Events.instance.AddListener<BeginYearEvent>(OnBeginYearEvent);
+        Events.instance.AddListener<EndYearEvent>(OnEndYearEvent);
+    }
+
+    void OnRenovateBuildingEvent(RenovateBuildingEvent e) {
+        if (e.Building == SelectedBuilding) {
+            Refresh();
+        }
+    }
+
+    void OnBeginYearEvent(BeginYearEvent e) {
+        buttonBlocker.gameObject.SetActive(true);
+    }
+
+    void OnEndYearEvent(EndYearEvent e) {
+        buttonBlocker.gameObject.SetActive(false);
+    }
 }

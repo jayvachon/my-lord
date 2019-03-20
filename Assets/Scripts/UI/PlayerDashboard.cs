@@ -11,16 +11,23 @@ public class PlayerDashboard : MonoBehaviour
 	public Text wealth;
 	public Text monthlyRevenue;
 	public Text progress;
+	public Button turnButton;
 
 	void Update() {
 		wealth.text = "Wealth: $" + player.Wealth.ToDisplay();
 		monthlyRevenue.text = "Monthly Revenue: $" + player.MonthlyRevenue.ToDisplay();
 		// progress.text = (Mathf.Round(clock.Progress*100)).ToString() + "%";
 		progress.text = clock.CurrentMonth;
+
+		turnButton.interactable = Game.State == GameState.YearStart;
 	}
 
-	public void NextMonth() {
-		Events.instance.Raise(new NewMonthEvent());
-		// Events.instance.Raise(new DeselectBuildingEvent()); // Glitch - this doesn't actually deselect the building, just raises the event for those listening
+	public void BeginYear() {
+		// clock.BeginYear();
+		Events.instance.Raise(new BeginYearEvent());
 	}
+
+	/*public void NextMonth() {
+		Events.instance.Raise(new NewMonthEvent());
+	}*/
 }

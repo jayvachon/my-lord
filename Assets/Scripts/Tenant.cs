@@ -29,7 +29,7 @@ public class Tenant
     public string Message { get; private set; }
 
     // Whether or not they can be evicted
-    public bool Evictable { get; private set; }
+    // public bool Evictable { get; private set; }
 
     public TenantState State { get; private set; }
 
@@ -47,7 +47,7 @@ public class Tenant
         MinQuality = minQuality;
     	NeedRepair = false;
     	Message = "";
-    	Evictable = false;
+    	// Evictable = false;
         State = state;
     }
 
@@ -55,10 +55,10 @@ public class Tenant
     	Rent = Mathf.Min(MaxRent, newRent);
     	if (newRent > MaxRent) {
     		Message = string.Format("I can't afford this rent! I'm paying ${0}", MaxRent);
-    		Evictable = true;
+    		// Evictable = true;
     	} else {
     		Message = "";
-    		Evictable = false;
+    		// Evictable = false;
     	}
     }
 
