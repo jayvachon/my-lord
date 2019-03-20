@@ -5,7 +5,7 @@ using EventSystem;
 
 public class Player2 : MB
 {
-	public Unit[] units;
+	public UnitManager units;
 
 	public int Wealth { get; private set; }
 
@@ -15,11 +15,14 @@ public class Player2 : MB
 
     protected override void AddListeners() {
     	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
+        Events.instance.AddListener<RepairUnitEvent>(OnRepairUnitEvent);
     }
 
     void OnNewMonthEvent(NewMonthEvent e) {
-    	for (int i = 0; i < units.Length; i ++) {
-    		Wealth += units[i].Rent;
-    	}
+        Wealth += units.Rent;
+    }
+
+    void OnRepairUnitEvent(RepairUnitEvent e) {
+        Wealth -= 500;
     }
 }

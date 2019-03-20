@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MBUI : MonoBehaviour
 {
- 	void Awake() {
+ 	void OnEnable() {
  		AddListeners();
  	}
  	

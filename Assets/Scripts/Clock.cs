@@ -5,6 +5,8 @@ using EventSystem;
 
 public class Clock : MB
 {
+	public UnitManager units;
+
 	public float Progress {
 		get { return progress / monthTime; }
 	}
@@ -27,14 +29,15 @@ public class Clock : MB
 	float progress = 0f;
 	int monthIndex = 0;
 	int year = 2020;
+	bool paused = false;
 
 	void Start() {
 		Game.State = GameState.YearStart;
 	}
 
 	void Update() {
-
-		if (Game.State == GameState.YearStart) {
+		
+		if (paused || Game.State == GameState.YearStart) {
 			return;
 		}
 
@@ -43,8 +46,13 @@ public class Clock : MB
 		} else {
 
 			if (monthIndex < 11) {
+				Events.instance.Raise(new EndMonthEvent());
 				monthIndex ++;
 				Events.instance.Raise(new NewMonthEvent());
+
+				if (units.RepairNeeded) {
+					paused = true;
+				}
 			} else {
 				year ++;
 				monthIndex = 0;
@@ -55,6 +63,10 @@ public class Clock : MB
 			progress = 0f;
 			
 		}
+	}
+
+	public void Resume() {
+		paused = false;
 	}
 
 	protected override void AddListeners() {
