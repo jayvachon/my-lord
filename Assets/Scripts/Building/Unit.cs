@@ -5,7 +5,7 @@ using EventSystem;
 
 public class Unit: MB
 {
-    public int Rent { get; private set; }
+    public int Rent { get; set; }
     public bool RepairNeeded { get; private set; }
 
     void Awake() {

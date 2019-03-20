@@ -9,9 +9,12 @@ public class UnitDisplay : MB
     public Unit unit;
     public Text rent;
     public GameObject repairGroup;
+    public GameObject newYearGroup;
+    public InputField rentInput;
 
     void Awake() {
     	repairGroup.SetActive(false);
+    	newYearGroup.SetActive(false);
     }
 
     void Update() {
@@ -28,13 +31,33 @@ public class UnitDisplay : MB
     	repairGroup.SetActive(false);
     }
 
+    public void IncreaseRent() {
+    	rentInput.text = (int.Parse(rentInput.text) + 100).ToString();
+    	unit.Rent = int.Parse(rentInput.text);
+    }
+
+    public void ReduceRent() {
+    	rentInput.text = (int.Parse(rentInput.text) - 100).ToString();
+    	unit.Rent = int.Parse(rentInput.text);
+    }
+
     protected override void AddListeners() {
     	Events.instance.AddListener<NewMonthEvent>(OnNewMonthEvent);
+    	Events.instance.AddListener<EndYearEvent>(OnEndYearEvent);
+    	Events.instance.AddListener<BeginYearEvent>(OnBeginYearEvent);
     }
 
     void OnNewMonthEvent(NewMonthEvent e) {
     	if (unit.RepairNeeded) {
     		repairGroup.SetActive(true);
     	}
+    }
+
+    void OnEndYearEvent(EndYearEvent e) {
+    	newYearGroup.SetActive(true);
+    }
+
+    void OnBeginYearEvent(BeginYearEvent e) {
+    	newYearGroup.SetActive(false);
     }
 }
